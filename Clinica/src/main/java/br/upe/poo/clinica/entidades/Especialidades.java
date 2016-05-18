@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -66,6 +69,7 @@ public class Especialidades implements Serializable {
     }
 
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         public Long getNumeroIdEspecialidade() {
                 return numeroIdEspecialidade;
         }
@@ -78,14 +82,14 @@ public class Especialidades implements Serializable {
 	public void setAreaMedicina(String areaMedicina) {
 		AreaMedicina = areaMedicina;
 	}
-        @ManyToMany(mappedBy="Medicos")
+        @ManyToMany(fetch = FetchType.EAGER,mappedBy="Medicos")
 	public List<Medicos> getMedicosAreaMedicina() {
 		return medicosAreaMedicina;
 	}
 	public void setMedicosAreaMedicina(List<Medicos> medicosAreaMedicina) {
 		this.medicosAreaMedicina = medicosAreaMedicina;
 	}
-        @OneToMany(mappedBy = "Exames")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy = "Exames")
 	public List<Exames> getExamesPossiveis() {
 		return examesPossiveis;
 	}

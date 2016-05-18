@@ -5,9 +5,14 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Pacientes implements Serializable {
@@ -123,6 +128,7 @@ public class Pacientes implements Serializable {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
+        @Temporal(TemporalType.DATE) 
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -142,6 +148,7 @@ public class Pacientes implements Serializable {
 		this.nome = nome;
 	}
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getCpf() {
 		return cpf;
 	}
@@ -173,28 +180,28 @@ public class Pacientes implements Serializable {
 		this.senha = senha;
 	}
         
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.EAGER)
 	public Medicos getMedicos() {
 		return medicos;
 	}
 	public void setMedicos(Medicos medicos) {
 		this.medicos = medicos;
 	}
-        @OneToMany(mappedBy="Consultas")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="Consultas")
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
-        @OneToMany(mappedBy="Exames")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="Exames")
 	public List<Exames> getExames() {
 		return exames;
 	}
 	public void setExames(List<Exames> exames) {
 		this.exames = exames;
 	}
-        @OneToMany(mappedBy="ResultadosExames")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="ResultadosExames")
 	public List<ResultadosExames> getResultadosExames() {
 		return resultadosExames;
 	}

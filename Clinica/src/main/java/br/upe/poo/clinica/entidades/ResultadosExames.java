@@ -3,6 +3,9 @@ package br.upe.poo.clinica.entidades;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -67,7 +70,7 @@ public class ResultadosExames implements Serializable {
 
       
     
-     @OneToOne 
+     @OneToOne(fetch = FetchType.EAGER) 
     public Exames getExame() {
         return exame;
     }
@@ -76,7 +79,7 @@ public class ResultadosExames implements Serializable {
         this.exame = exame;
     }
     
-     @ManyToOne 
+     @ManyToOne(fetch = FetchType.EAGER) 
     public Medicos getMedico() {
         return medico;
     }
@@ -85,7 +88,8 @@ public class ResultadosExames implements Serializable {
         this.medico = medico;
     }
       
-     @Id 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getID() {
         return ID;
     }
@@ -93,7 +97,7 @@ public class ResultadosExames implements Serializable {
     public void setID(Long ID) {
         this.ID = ID;
     }
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     public Pacientes getPaciente() {
         return paciente;
     }

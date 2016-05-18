@@ -5,9 +5,14 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Consultas implements Serializable {
@@ -91,6 +96,7 @@ public class Consultas implements Serializable {
     }
 
                 @Id
+                @GeneratedValue(strategy = GenerationType.IDENTITY)
                 public Long getNumeroConsulta() {
                     return NumeroConsulta;
                  }
@@ -98,27 +104,28 @@ public class Consultas implements Serializable {
                 public void setNumeroConsulta(Long NumeroConsulta) {
                     this.NumeroConsulta = NumeroConsulta;
                  }
+                @Temporal(TemporalType.DATE)
 		public Date getDiaConsulta() {
 			return diaConsulta;
 		}
 		public void setDiaConsulta(Date diaConsulta) {
 			this.diaConsulta = diaConsulta;
 		}
-                
+                @Temporal(TemporalType.DATE)
 		public Date getHoraConsulta() {
 			return horaConsulta;
 		}
 		public void setHoraConsulta(Date horaConsulta) {
 			this.horaConsulta = horaConsulta;
 		}
-                @OneToOne
+                @OneToOne(fetch = FetchType.EAGER)
 		public Especialidades getTipoEspecialidade() {
 			return tipoEspecialidade;
 		}
 		public void setTipoEspecialidade(Especialidades tipoEspecialidade) {
 			this.tipoEspecialidade = tipoEspecialidade;
 		}
-                @ManyToOne
+                @ManyToOne(fetch = FetchType.EAGER)
 		public Pacientes getPaciente() {
 			return paciente;
 		}
@@ -131,14 +138,14 @@ public class Consultas implements Serializable {
 		public void setSituacaoConsulta(boolean situacaoConsulta) {
 			this.situacaoConsulta = situacaoConsulta;
 		}
-                @OneToOne(mappedBy = "DadosConsultas")
+                @OneToOne(fetch = FetchType.EAGER,mappedBy = "DadosConsultas")              
 		public DadosConsultas getDadosConsulta() {
 			return dadosConsulta;
 		}
 		public void setDadosConsulta(DadosConsultas dadosConsulta) {
 			this.dadosConsulta = dadosConsulta;
 		}
-                @ManyToOne
+                @ManyToOne(fetch = FetchType.EAGER)
 		public Medicos getMedico() {
 			return medico;
 		}

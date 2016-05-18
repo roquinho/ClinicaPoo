@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -120,6 +123,7 @@ public class Medicos implements Serializable {
 		this.nome = nome;
 	}
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getCpf() {
 		return cpf;
 	}
@@ -156,35 +160,35 @@ public class Medicos implements Serializable {
 	public void setCrm(long crm) {
 		this.crm = crm;
 	}
-        @OneToMany(mappedBy="Pacientes")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="Pacientes")
 	public List<Pacientes> getPacientes() {
 		return pacientes;
 	}
 	public void setPacientes(List<Pacientes> pacientes) {
 		this.pacientes = pacientes;
 	}
-        @OneToMany(mappedBy="Consultas")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="Consultas")
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
-        @OneToMany(mappedBy="exames")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="exames")
 	public List<Exames> getExames() {
 		return exames;
 	}
 	public void setExames(List<Exames> exames) {
 		this.exames = exames;
 	}
-        @OneToMany(mappedBy="ResultadosExames")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="ResultadosExames")
 	public List<ResultadosExames> getResultadosExames() {
 		return resultadosExames;
 	}
 	public void setResultadosExames(List<ResultadosExames> resultadosExames) {
 		this.resultadosExames = resultadosExames;
 	}
-        @ManyToMany(mappedBy="Especialidades")
+        @ManyToMany(fetch = FetchType.EAGER,mappedBy="Especialidades")
 	public List<Especialidades> getEspecialidades() {
 		return especialidades;
 	}

@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class DadosConsultas implements Serializable {
@@ -67,6 +72,7 @@ public class DadosConsultas implements Serializable {
     
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdDadosConsulta() {
         return IdDadosConsulta;
     }
@@ -75,7 +81,7 @@ public class DadosConsultas implements Serializable {
         this.IdDadosConsulta = IdDadosConsulta;
     }
   
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     public Consultas getConsulta() {
         return consulta;
     }
@@ -83,14 +89,15 @@ public class DadosConsultas implements Serializable {
     public void setConsulta(Consultas consulta) {
         this.consulta = consulta;
     }
-    
+  @Temporal(TemporalType.DATE)  
   public Date getInicioConsulta() {
       return this.inicioConsulta;
   }
   public void setInicioConsulta(Date inicioConsulta) {
       this.inicioConsulta = inicioConsulta;
   }
-  public Date GetFimConsulta() {
+  @Temporal(TemporalType.DATE) 
+  public Date getFimConsulta() {
       return this.fimConsulta;
   }
   public void setFimConsulta(Date fimConsulta) {

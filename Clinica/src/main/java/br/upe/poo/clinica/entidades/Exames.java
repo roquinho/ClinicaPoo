@@ -4,9 +4,14 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Exames implements Serializable {
@@ -90,18 +95,21 @@ public class Exames implements Serializable {
 
     
          @Id
+         @GeneratedValue(strategy = GenerationType.IDENTITY)
          public Long getIDExame() {
                  return IDExame;
           }
          public void setIDExame(Long IDExame) {
                 this.IDExame = IDExame;
           }
+        @Temporal(TemporalType.DATE)  
 	public Date getDataExame() {
 		return dataExame;
 	  }
 	public void setDataExame(Date dataExame) {
 		this.dataExame = dataExame;
 	}
+        @Temporal(TemporalType.DATE) 
 	public Date getHoraExame() {
 		return horaExame;
 	}
@@ -114,28 +122,28 @@ public class Exames implements Serializable {
 	public void setTipoExame(String tipoExame) {
 		this.tipoExame = tipoExame;
 	}
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.EAGER)
 	public Pacientes getPaciente() {
 		return paciente;
 	}
 	public void setPaciente(Pacientes paciente) {
 		this.paciente = paciente;
 	}
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.EAGER)
 	public Medicos getMedico() {
 		return medico;
 	}
 	public void setMedico(Medicos medico) {
 		this.medico = medico;
 	}
-        @OneToOne(mappedBy = "resultadosExames")
+        @OneToOne(fetch = FetchType.EAGER,mappedBy = "resultadosExames")
 	public ResultadosExames getResultadoExame() {
 		return resultadoExame;
 	}
 	public void setResultadoExame(ResultadosExames resultadoExame) {
 		this.resultadoExame = resultadoExame;
 	}
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.EAGER)
         public Especialidades getEspecialidade() {
                return especialidade;
         }
