@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,7 +16,6 @@ import javax.persistence.TemporalType;
 @Entity
 public class Pacientes implements Serializable {
 	private String nome;
-	private int idade;
 	private Date dataNascimento;
 	private String sexo;
 	private Long cpf;
@@ -25,16 +23,13 @@ public class Pacientes implements Serializable {
 	private String telefone;
 	private String loginNome;
 	private String senha;
-	private Medicos medicos;
 	private List<Consultas>consultas;
 	private List<Exames>exames;
-	private List<ResultadosExames>resultadosExames;
 	
 	 public Pacientes() {
 		 
 	 }
-	 public Pacientes(String nome,String senha,String endereco,String telefone,String login,Date dataNascimento,String sexo) {
-             
+	 public Pacientes(String nome,String senha,String endereco,String telefone,String login,Date dataNascimento,String sexo) {             
 		 this.endereco = endereco;
 		 this.nome = nome;
 		 this.telefone = telefone;
@@ -46,20 +41,17 @@ public class Pacientes implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.nome);
-        hash = 41 * hash + this.idade;
-        hash = 41 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 41 * hash + Objects.hashCode(this.sexo);
-        hash = 41 * hash + Objects.hashCode(this.cpf);
-        hash = 41 * hash + Objects.hashCode(this.endereco);
-        hash = 41 * hash + Objects.hashCode(this.telefone);
-        hash = 41 * hash + Objects.hashCode(this.loginNome);
-        hash = 41 * hash + Objects.hashCode(this.senha);
-        hash = 41 * hash + Objects.hashCode(this.medicos);
-        hash = 41 * hash + Objects.hashCode(this.consultas);
-        hash = 41 * hash + Objects.hashCode(this.exames);
-        hash = 41 * hash + Objects.hashCode(this.resultadosExames);
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.nome);
+        hash = 73 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 73 * hash + Objects.hashCode(this.sexo);
+        hash = 73 * hash + Objects.hashCode(this.cpf);
+        hash = 73 * hash + Objects.hashCode(this.endereco);
+        hash = 73 * hash + Objects.hashCode(this.telefone);
+        hash = 73 * hash + Objects.hashCode(this.loginNome);
+        hash = 73 * hash + Objects.hashCode(this.senha);
+        hash = 73 * hash + Objects.hashCode(this.consultas);
+        hash = 73 * hash + Objects.hashCode(this.exames);
         return hash;
     }
 
@@ -75,9 +67,6 @@ public class Pacientes implements Serializable {
             return false;
         }
         final Pacientes other = (Pacientes) obj;
-        if (this.idade != other.idade) {
-            return false;
-        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
@@ -102,16 +91,10 @@ public class Pacientes implements Serializable {
         if (!Objects.equals(this.cpf, other.cpf)) {
             return false;
         }
-        if (!Objects.equals(this.medicos, other.medicos)) {
-            return false;
-        }
         if (!Objects.equals(this.consultas, other.consultas)) {
             return false;
         }
         if (!Objects.equals(this.exames, other.exames)) {
-            return false;
-        }
-        if (!Objects.equals(this.resultadosExames, other.resultadosExames)) {
             return false;
         }
         return true;
@@ -119,9 +102,9 @@ public class Pacientes implements Serializable {
 
     @Override
     public String toString() {
-        return "Pacientes{" + "nome=" + nome + ", idade=" + idade + ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", loginNome=" + loginNome + ", senha=" + senha + ", medicos=" + medicos + ", consultas=" + consultas + ", exames=" + exames + ", resultadosExames=" + resultadosExames + '}';
+        return "Pacientes{" + "nome=" + nome + ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", loginNome=" + loginNome + ", senha=" + senha + ", consultas=" + consultas + ", exames=" + exames + '}';
     }
-    
+           
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getCpf() {
@@ -130,12 +113,6 @@ public class Pacientes implements Serializable {
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	} 
-	public int getIdade() {
-		return idade;
-	}
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
         @Temporal(TemporalType.DATE) 
 	public Date getDataNascimento() {
 		return dataNascimento;
@@ -180,34 +157,20 @@ public class Pacientes implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-        
-        @ManyToOne(fetch = FetchType.EAGER)
-	public Medicos getMedicos() {
-		return medicos;
-	}
-	public void setMedicos(Medicos medicos) {
-		this.medicos = medicos;
-	}
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="Consultas")
+
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="Pacientes")
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="Exames")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="Pacientes")
 	public List<Exames> getExames() {
 		return exames;
 	}
 	public void setExames(List<Exames> exames) {
 		this.exames = exames;
 	}
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="ResultadosExames")
-	public List<ResultadosExames> getResultadosExames() {
-		return resultadosExames;
-	}
-	public void setResultadosExames(List<ResultadosExames> resultadosExames) {
-		this.resultadosExames = resultadosExames;
-	}
-	
+
 }

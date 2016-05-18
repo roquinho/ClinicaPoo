@@ -18,22 +18,26 @@ public class DadosConsultas implements Serializable {
   private Date fimConsulta;
   private Consultas consulta;
   private Long idDadosConsulta;
+  private String Observacoes;
   
     public DadosConsultas() {
         
     }
     
-    public DadosConsultas(Consultas consultas) {
+    public DadosConsultas(Consultas consultas,Date inicioConsulta,Date fimConsulta) {
         this.consulta = consultas;
+        this.inicioConsulta = inicioConsulta;
+        this.fimConsulta = fimConsulta;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.inicioConsulta);
-        hash = 71 * hash + Objects.hashCode(this.fimConsulta);
-        hash = 71 * hash + Objects.hashCode(this.consulta);
-        hash = 71 * hash + Objects.hashCode(this.idDadosConsulta);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.inicioConsulta);
+        hash = 53 * hash + Objects.hashCode(this.fimConsulta);
+        hash = 53 * hash + Objects.hashCode(this.consulta);
+        hash = 53 * hash + Objects.hashCode(this.idDadosConsulta);
+        hash = 53 * hash + Objects.hashCode(this.Observacoes);
         return hash;
     }
 
@@ -49,6 +53,9 @@ public class DadosConsultas implements Serializable {
             return false;
         }
         final DadosConsultas other = (DadosConsultas) obj;
+        if (!Objects.equals(this.Observacoes, other.Observacoes)) {
+            return false;
+        }
         if (!Objects.equals(this.inicioConsulta, other.inicioConsulta)) {
             return false;
         }
@@ -66,10 +73,8 @@ public class DadosConsultas implements Serializable {
 
     @Override
     public String toString() {
-        return "DadosConsultas{" + "inicioConsulta=" + inicioConsulta + ", fimConsulta=" + fimConsulta + ", consulta=" + consulta + ", idDadosConsulta=" + idDadosConsulta + '}';
+        return "DadosConsultas{" + "inicioConsulta=" + inicioConsulta + ", fimConsulta=" + fimConsulta + ", consulta=" + consulta + ", idDadosConsulta=" + idDadosConsulta + ", Observacoes=" + Observacoes + '}';
     }
-
-    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,5 +108,13 @@ public class DadosConsultas implements Serializable {
   public void setFimConsulta(Date fimConsulta) {
       this.fimConsulta = fimConsulta;
   }
+
+  public String getObservacoes() {
+        return Observacoes;
+    }
+
+  public void setObservacoes(String Observacoes) {
+        this.Observacoes = Observacoes;
+    }
   
 }

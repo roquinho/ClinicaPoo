@@ -22,30 +22,28 @@ public class Exames implements Serializable {
 	private Date horaExame;
 	private String tipoExame;
 	private Pacientes paciente;
-	private Medicos medico;
 	private ResultadosExames resultadoExame;
-        private Especialidades especialidade;
 	 
 	 public Exames() {
 		 
 	 }
          
-	 public Exames(String tipoExame,Especialidades especialidades) {
+	 public Exames(String tipoExame,Date dataExame,Date horaExame,Pacientes paciente) {
                  this.tipoExame = tipoExame;
-                 this.especialidade = especialidades;
+                 this.dataExame = dataExame;
+                 this.horaExame = horaExame;
+                 this.paciente = paciente;
 	 }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.idExame);
-        hash = 37 * hash + Objects.hashCode(this.dataExame);
-        hash = 37 * hash + Objects.hashCode(this.horaExame);
-        hash = 37 * hash + Objects.hashCode(this.tipoExame);
-        hash = 37 * hash + Objects.hashCode(this.paciente);
-        hash = 37 * hash + Objects.hashCode(this.medico);
-        hash = 37 * hash + Objects.hashCode(this.resultadoExame);
-        hash = 37 * hash + Objects.hashCode(this.especialidade);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.idExame);
+        hash = 97 * hash + Objects.hashCode(this.dataExame);
+        hash = 97 * hash + Objects.hashCode(this.horaExame);
+        hash = 97 * hash + Objects.hashCode(this.tipoExame);
+        hash = 97 * hash + Objects.hashCode(this.paciente);
+        hash = 97 * hash + Objects.hashCode(this.resultadoExame);
         return hash;
     }
 
@@ -76,13 +74,7 @@ public class Exames implements Serializable {
         if (!Objects.equals(this.paciente, other.paciente)) {
             return false;
         }
-        if (!Objects.equals(this.medico, other.medico)) {
-            return false;
-        }
         if (!Objects.equals(this.resultadoExame, other.resultadoExame)) {
-            return false;
-        }
-        if (!Objects.equals(this.especialidade, other.especialidade)) {
             return false;
         }
         return true;
@@ -90,9 +82,8 @@ public class Exames implements Serializable {
 
     @Override
     public String toString() {
-        return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", medico=" + medico + ", resultadoExame=" + resultadoExame + ", especialidade=" + especialidade + '}';
+        return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", resultadoExame=" + resultadoExame + '}';
     }
-
     
          @Id
          @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -129,29 +120,14 @@ public class Exames implements Serializable {
 	public void setPaciente(Pacientes paciente) {
 		this.paciente = paciente;
 	}
-        @ManyToOne(fetch = FetchType.EAGER)
-	public Medicos getMedico() {
-		return medico;
-	}
-	public void setMedico(Medicos medico) {
-		this.medico = medico;
-	}
-        @OneToOne(fetch = FetchType.EAGER,mappedBy = "resultadosExames")
+        @OneToOne(fetch = FetchType.EAGER,mappedBy = "Exames")
 	public ResultadosExames getResultadoExame() {
 		return resultadoExame;
 	}
 	public void setResultadoExame(ResultadosExames resultadoExame) {
 		this.resultadoExame = resultadoExame;
 	}
-        @ManyToOne(fetch = FetchType.EAGER)
-        public Especialidades getEspecialidade() {
-               return especialidade;
-        }
 
-        public void setEspecialidade(Especialidades especialidade) {
-               this.especialidade = especialidade;
-        }
-        
 	 
 	
 
