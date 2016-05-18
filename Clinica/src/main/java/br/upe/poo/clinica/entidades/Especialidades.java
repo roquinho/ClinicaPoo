@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Especialidades implements Serializable {
-	private String AreaMedicina;
+	private String areaMedicina;
 	private List<Medicos>medicosAreaMedicina;
 	private List<Exames>examesPossiveis;
         private Long numeroIdEspecialidade;
@@ -21,15 +21,16 @@ public class Especialidades implements Serializable {
 	   public Especialidades() {
 		   
 	   }
-	   public Especialidades(List<Medicos>listaMedicos,List<Exames>listaExames) {		   
+	   public Especialidades(String areaMedicina,List<Medicos>listaMedicos,List<Exames>listaExames) {		   
                    this.medicosAreaMedicina = listaMedicos;
                    this.examesPossiveis = listaExames;
+                   this.areaMedicina = areaMedicina;
  	   }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.AreaMedicina);
+        hash = 59 * hash + Objects.hashCode(this.areaMedicina);
         hash = 59 * hash + Objects.hashCode(this.medicosAreaMedicina);
         hash = 59 * hash + Objects.hashCode(this.examesPossiveis);
         hash = 59 * hash + Objects.hashCode(this.numeroIdEspecialidade);
@@ -48,7 +49,7 @@ public class Especialidades implements Serializable {
             return false;
         }
         final Especialidades other = (Especialidades) obj;
-        if (!Objects.equals(this.AreaMedicina, other.AreaMedicina)) {
+        if (!Objects.equals(this.areaMedicina, other.areaMedicina)) {
             return false;
         }
         if (!Objects.equals(this.medicosAreaMedicina, other.medicosAreaMedicina)) {
@@ -65,7 +66,7 @@ public class Especialidades implements Serializable {
 
     @Override
     public String toString() {
-        return "Especialidades{" + "AreaMedicina=" + AreaMedicina + ", medicosAreaMedicina=" + medicosAreaMedicina + ", examesPossiveis=" + examesPossiveis + ", numeroIdEspecialidade=" + numeroIdEspecialidade + '}';
+        return "Especialidades{" + "areaMedicina=" + areaMedicina + ", medicosAreaMedicina=" + medicosAreaMedicina + ", examesPossiveis=" + examesPossiveis + ", numeroIdEspecialidade=" + numeroIdEspecialidade + '}';
     }
 
         @Id
@@ -77,12 +78,12 @@ public class Especialidades implements Serializable {
                this.numeroIdEspecialidade = numeroIdEspecialidade;
         }          
 	public String getAreaMedicina() {
-		return AreaMedicina;
+		return areaMedicina;
 	}
 	public void setAreaMedicina(String areaMedicina) {
-		AreaMedicina = areaMedicina;
+		this.areaMedicina = areaMedicina;
 	}
-        @ManyToMany(fetch = FetchType.EAGER,mappedBy="Medicos")
+        @ManyToMany(fetch = FetchType.EAGER)
 	public List<Medicos> getMedicosAreaMedicina() {
 		return medicosAreaMedicina;
 	}

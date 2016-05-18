@@ -17,7 +17,7 @@ public class DadosConsultas implements Serializable {
   private Date inicioConsulta;
   private Date fimConsulta;
   private Consultas consulta;
-  private Long IdDadosConsulta;
+  private Long idDadosConsulta;
   
     public DadosConsultas() {
         
@@ -33,7 +33,7 @@ public class DadosConsultas implements Serializable {
         hash = 71 * hash + Objects.hashCode(this.inicioConsulta);
         hash = 71 * hash + Objects.hashCode(this.fimConsulta);
         hash = 71 * hash + Objects.hashCode(this.consulta);
-        hash = 71 * hash + Objects.hashCode(this.IdDadosConsulta);
+        hash = 71 * hash + Objects.hashCode(this.idDadosConsulta);
         return hash;
     }
 
@@ -58,7 +58,7 @@ public class DadosConsultas implements Serializable {
         if (!Objects.equals(this.consulta, other.consulta)) {
             return false;
         }
-        if (!Objects.equals(this.IdDadosConsulta, other.IdDadosConsulta)) {
+        if (!Objects.equals(this.idDadosConsulta, other.idDadosConsulta)) {
             return false;
         }
         return true;
@@ -66,7 +66,7 @@ public class DadosConsultas implements Serializable {
 
     @Override
     public String toString() {
-        return "DadosConsultas{" + "inicioConsulta=" + inicioConsulta + ", fimConsulta=" + fimConsulta + ", consulta=" + consulta + ", IdDadosConsulta=" + IdDadosConsulta + '}';
+        return "DadosConsultas{" + "inicioConsulta=" + inicioConsulta + ", fimConsulta=" + fimConsulta + ", consulta=" + consulta + ", idDadosConsulta=" + idDadosConsulta + '}';
     }
 
     
@@ -74,11 +74,11 @@ public class DadosConsultas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdDadosConsulta() {
-        return IdDadosConsulta;
+        return idDadosConsulta;
     }
 
-    public void setIdDadosConsulta(Long IdDadosConsulta) {
-        this.IdDadosConsulta = IdDadosConsulta;
+    public void setIdDadosConsulta(Long idDadosConsulta) {
+        this.idDadosConsulta = idDadosConsulta;
     }
   
     @OneToOne(fetch = FetchType.EAGER)

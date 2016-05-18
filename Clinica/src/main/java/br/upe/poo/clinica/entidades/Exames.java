@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 public class Exames implements Serializable {
 
     
-        private Long IDExame;
+        private Long idExame;
 	private Date dataExame;
 	private Date horaExame;
 	private String tipoExame;
@@ -38,7 +38,7 @@ public class Exames implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.IDExame);
+        hash = 37 * hash + Objects.hashCode(this.idExame);
         hash = 37 * hash + Objects.hashCode(this.dataExame);
         hash = 37 * hash + Objects.hashCode(this.horaExame);
         hash = 37 * hash + Objects.hashCode(this.tipoExame);
@@ -64,7 +64,7 @@ public class Exames implements Serializable {
         if (!Objects.equals(this.tipoExame, other.tipoExame)) {
             return false;
         }
-        if (!Objects.equals(this.IDExame, other.IDExame)) {
+        if (!Objects.equals(this.idExame, other.idExame)) {
             return false;
         }
         if (!Objects.equals(this.dataExame, other.dataExame)) {
@@ -90,17 +90,17 @@ public class Exames implements Serializable {
 
     @Override
     public String toString() {
-        return "Exames{" + "IDExame=" + IDExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", medico=" + medico + ", resultadoExame=" + resultadoExame + ", especialidade=" + especialidade + '}';
+        return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", medico=" + medico + ", resultadoExame=" + resultadoExame + ", especialidade=" + especialidade + '}';
     }
 
     
          @Id
          @GeneratedValue(strategy = GenerationType.IDENTITY)
-         public Long getIDExame() {
-                 return IDExame;
+         public Long getIdExame() {
+                 return idExame;
           }
-         public void setIDExame(Long IDExame) {
-                this.IDExame = IDExame;
+         public void setIdExame(Long idExame) {
+                this.idExame = idExame;
           }
         @Temporal(TemporalType.DATE)  
 	public Date getDataExame() {

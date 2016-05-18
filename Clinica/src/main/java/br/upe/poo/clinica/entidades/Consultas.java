@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 @Entity
 public class Consultas implements Serializable {
     
-        private Long NumeroConsulta;
+        private Long numeroConsulta;
 	private Date diaConsulta;
 	private Date horaConsulta;
 	private Especialidades tipoEspecialidade;
@@ -40,7 +40,7 @@ public class Consultas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.NumeroConsulta);
+        hash = 83 * hash + Objects.hashCode(this.numeroConsulta);
         hash = 83 * hash + Objects.hashCode(this.diaConsulta);
         hash = 83 * hash + Objects.hashCode(this.horaConsulta);
         hash = 83 * hash + Objects.hashCode(this.tipoEspecialidade);
@@ -66,7 +66,7 @@ public class Consultas implements Serializable {
         if (this.situacaoConsulta != other.situacaoConsulta) {
             return false;
         }
-        if (!Objects.equals(this.NumeroConsulta, other.NumeroConsulta)) {
+        if (!Objects.equals(this.numeroConsulta, other.numeroConsulta)) {
             return false;
         }
         if (!Objects.equals(this.diaConsulta, other.diaConsulta)) {
@@ -92,17 +92,17 @@ public class Consultas implements Serializable {
 
     @Override
     public String toString() {
-        return "Consultas{" + "NumeroConsulta=" + NumeroConsulta + ", diaConsulta=" + diaConsulta + ", horaConsulta=" + horaConsulta + ", tipoEspecialidade=" + tipoEspecialidade + ", paciente=" + paciente + ", situacaoConsulta=" + situacaoConsulta + ", dadosConsulta=" + dadosConsulta  + ", medico=" + medico + '}';
+        return "Consultas{" + "numeroConsulta=" + numeroConsulta + ", diaConsulta=" + diaConsulta + ", horaConsulta=" + horaConsulta + ", tipoEspecialidade=" + tipoEspecialidade + ", paciente=" + paciente + ", situacaoConsulta=" + situacaoConsulta + ", dadosConsulta=" + dadosConsulta  + ", medico=" + medico + '}';
     }
 
                 @Id
                 @GeneratedValue(strategy = GenerationType.IDENTITY)
                 public Long getNumeroConsulta() {
-                    return NumeroConsulta;
+                    return numeroConsulta;
                  }
 
-                public void setNumeroConsulta(Long NumeroConsulta) {
-                    this.NumeroConsulta = NumeroConsulta;
+                public void setNumeroConsulta(Long numeroConsulta) {
+                    this.numeroConsulta = numeroConsulta;
                  }
                 @Temporal(TemporalType.DATE)
 		public Date getDiaConsulta() {

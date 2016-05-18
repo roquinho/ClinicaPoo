@@ -3,6 +3,7 @@ package br.upe.poo.clinica.ui;
 
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.regraNegocio.Fachada;
+import br.upe.poo.clinica.regraNegocio.RegraNegocioPacienteBuscarPacienteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,15 +33,15 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     
-    @RequestMapping(value = "paciente/buscaCpf/",produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/paciente/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
     public Pacientes buscarPacienteCpf(Long cpf) {
-        Pacientes paciente = null;
+         Pacientes paciente = null;
         try {
-          paciente = this.fachada.buscarPacienteCpf(cpf);
-        } catch (Exception e) {
-            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, e);
+            paciente = this.fachada.buscarPacienteCpf(cpf);
+        } catch (RegraNegocioPacienteBuscarPacienteException ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return paciente;
+       return paciente; 
     }
     @RequestMapping(value = "paciente/buscaCpf/",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Pacientes> buscarPacienteNome(String nome) {

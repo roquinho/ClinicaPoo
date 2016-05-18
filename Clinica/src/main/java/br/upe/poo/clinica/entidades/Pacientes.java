@@ -121,7 +121,15 @@ public class Pacientes implements Serializable {
     public String toString() {
         return "Pacientes{" + "nome=" + nome + ", idade=" + idade + ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", loginNome=" + loginNome + ", senha=" + senha + ", medicos=" + medicos + ", consultas=" + consultas + ", exames=" + exames + ", resultadosExames=" + resultadosExames + '}';
     }
-         
+    
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getCpf() {
+		return cpf;
+	}
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	} 
 	public int getIdade() {
 		return idade;
 	}
@@ -147,14 +155,7 @@ public class Pacientes implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getCpf() {
-		return cpf;
-	}
-	public void setCpf(Long cpf) {
-		this.cpf = cpf;
-	}
+        
 	public String getEndereco() {
 		return endereco;
 	}

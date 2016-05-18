@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 public class Medicos implements Serializable {
     
 	private String nome;
-	private long cpf;
+	private Long cpf;
 	private String endereco;
 	private long telefone;
 	private String loginNome;
@@ -112,9 +112,15 @@ public class Medicos implements Serializable {
     public String toString() {
         return "Medicos{" + "nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", loginNome=" + loginNome + ", senha=" + senha + ", crm=" + crm + ", pacientes=" + pacientes + ", consultas=" + consultas + ", exames=" + exames + ", resultadosExames=" + resultadosExames + ", especialidades=" + especialidades + '}';
     }
-         
-         
-         
+                 
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getCpf() {
+		return cpf;
+	}
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	} 
          
 	public String getNome() {
 		return nome;
@@ -122,14 +128,7 @@ public class Medicos implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getCpf() {
-		return cpf;
-	}
-	public void setCpf(long cpf) {
-		this.cpf = cpf;
-	}
+        
 	public String getEndereco() {
 		return endereco;
 	}

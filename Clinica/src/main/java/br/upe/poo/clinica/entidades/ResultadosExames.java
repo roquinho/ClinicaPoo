@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class ResultadosExames implements Serializable {
  
       private Pacientes paciente;
-      private Long ID;
+      private Long idResultadoExames;
       private Medicos medico;
       private Exames exame;
 
@@ -30,7 +30,7 @@ public class ResultadosExames implements Serializable {
     public int hashCode() {
         int hash = 3;
         hash = 17 * hash + Objects.hashCode(this.paciente);
-        hash = 17 * hash + Objects.hashCode(this.ID);
+        hash = 17 * hash + Objects.hashCode(this.idResultadoExames);
         hash = 17 * hash + Objects.hashCode(this.medico);
         hash = 17 * hash + Objects.hashCode(this.exame);
         return hash;
@@ -51,7 +51,7 @@ public class ResultadosExames implements Serializable {
         if (!Objects.equals(this.paciente, other.paciente)) {
             return false;
         }
-        if (!Objects.equals(this.ID, other.ID)) {
+        if (!Objects.equals(this.idResultadoExames, other.idResultadoExames)) {
             return false;
         }
         if (!Objects.equals(this.medico, other.medico)) {
@@ -65,10 +65,18 @@ public class ResultadosExames implements Serializable {
 
     @Override
     public String toString() {
-        return "ResultadosExames{" + "paciente=" + paciente + ", ID=" + ID + ", medico=" + medico + ", exame=" + exame + '}';
+        return "ResultadosExames{" + "paciente=" + paciente + ", idResultadoExames=" + idResultadoExames + ", medico=" + medico + ", exame=" + exame + '}';
     }
 
-      
+       @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return idResultadoExames;
+    }
+
+    public void setId(Long idResultadoExames) {
+        this.idResultadoExames = idResultadoExames;
+    }  
     
      @OneToOne(fetch = FetchType.EAGER) 
     public Exames getExame() {
@@ -87,16 +95,7 @@ public class ResultadosExames implements Serializable {
     public void setMedico(Medicos medico) {
         this.medico = medico;
     }
-      
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
+       
     @ManyToOne(fetch = FetchType.EAGER)
     public Pacientes getPaciente() {
         return paciente;
