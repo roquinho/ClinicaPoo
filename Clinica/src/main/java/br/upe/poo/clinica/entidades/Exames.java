@@ -2,6 +2,7 @@ package br.upe.poo.clinica.entidades;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,8 +19,8 @@ public class Exames implements Serializable {
 
     
         private Long idExame;
-	private Date dataExame;
-	private Date horaExame;
+	private Calendar dataExame;
+	private Calendar horaExame;
 	private String tipoExame;
 	private Pacientes paciente;
 	private ResultadosExames resultadoExame;
@@ -28,7 +29,7 @@ public class Exames implements Serializable {
 		 
 	 }
          
-	 public Exames(String tipoExame,Date dataExame,Date horaExame,Pacientes paciente) {
+	 public Exames(String tipoExame,Calendar dataExame,Calendar horaExame,Pacientes paciente) {
                  this.tipoExame = tipoExame;
                  this.dataExame = dataExame;
                  this.horaExame = horaExame;
@@ -38,12 +39,12 @@ public class Exames implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.idExame);
-        hash = 97 * hash + Objects.hashCode(this.dataExame);
-        hash = 97 * hash + Objects.hashCode(this.horaExame);
-        hash = 97 * hash + Objects.hashCode(this.tipoExame);
-        hash = 97 * hash + Objects.hashCode(this.paciente);
-        hash = 97 * hash + Objects.hashCode(this.resultadoExame);
+        hash = 79 * hash + Objects.hashCode(this.idExame);
+        hash = 79 * hash + Objects.hashCode(this.dataExame);
+        hash = 79 * hash + Objects.hashCode(this.horaExame);
+        hash = 79 * hash + Objects.hashCode(this.tipoExame);
+        hash = 79 * hash + Objects.hashCode(this.paciente);
+        hash = 79 * hash + Objects.hashCode(this.resultadoExame);
         return hash;
     }
 
@@ -84,7 +85,7 @@ public class Exames implements Serializable {
     public String toString() {
         return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", resultadoExame=" + resultadoExame + '}';
     }
-    
+
          @Id
          @GeneratedValue(strategy = GenerationType.IDENTITY)
          public Long getIdExame() {
@@ -94,17 +95,17 @@ public class Exames implements Serializable {
                 this.idExame = idExame;
           }
         @Temporal(TemporalType.DATE)  
-	public Date getDataExame() {
+	public Calendar getDataExame() {
 		return dataExame;
 	  }
-	public void setDataExame(Date dataExame) {
+	public void setDataExame(Calendar dataExame) {
 		this.dataExame = dataExame;
 	}
-        @Temporal(TemporalType.DATE) 
-	public Date getHoraExame() {
+        @Temporal(TemporalType.TIME) 
+	public Calendar getHoraExame() {
 		return horaExame;
 	}
-	public void setHoraExame(Date horaExame) {
+	public void setHoraExame(Calendar horaExame) {
 		this.horaExame = horaExame;
 	}
 	public String getTipoExame() {
@@ -126,9 +127,6 @@ public class Exames implements Serializable {
 	}
 	public void setResultadoExame(ResultadosExames resultadoExame) {
 		this.resultadoExame = resultadoExame;
-	}
-
-	 
-	
+	}	
 
 }
