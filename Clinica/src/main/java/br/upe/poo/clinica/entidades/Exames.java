@@ -21,7 +21,7 @@ public class Exames implements Serializable {
 	private String tipoExame;
 	private Pacientes paciente;
 	private ResultadosExames resultadoExame;
-	 
+	private Consultas consulta; 
 	 public Exames() {
 		 
 	 }
@@ -36,12 +36,13 @@ public class Exames implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.idExame);
-        hash = 23 * hash + Objects.hashCode(this.dataExame);
-        hash = 23 * hash + Objects.hashCode(this.horaExame);
-        hash = 23 * hash + Objects.hashCode(this.tipoExame);
-        hash = 23 * hash + Objects.hashCode(this.paciente);
-        hash = 23 * hash + Objects.hashCode(this.resultadoExame);
+        hash = 97 * hash + Objects.hashCode(this.idExame);
+        hash = 97 * hash + Objects.hashCode(this.dataExame);
+        hash = 97 * hash + Objects.hashCode(this.horaExame);
+        hash = 97 * hash + Objects.hashCode(this.tipoExame);
+        hash = 97 * hash + Objects.hashCode(this.paciente);
+        hash = 97 * hash + Objects.hashCode(this.resultadoExame);
+        hash = 97 * hash + Objects.hashCode(this.consulta);
         return hash;
     }
 
@@ -75,14 +76,16 @@ public class Exames implements Serializable {
         if (!Objects.equals(this.resultadoExame, other.resultadoExame)) {
             return false;
         }
+        if (!Objects.equals(this.consulta, other.consulta)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", resultadoExame=" + resultadoExame + '}';
+        return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", resultadoExame=" + resultadoExame + ", consulta=" + consulta + '}';
     }
-
          @Id
          @GeneratedValue(strategy = GenerationType.IDENTITY)
          public Long getIdExame() {
@@ -124,6 +127,15 @@ public class Exames implements Serializable {
 	}
 	public void setResultadoExame(ResultadosExames resultadoExame) {
 		this.resultadoExame = resultadoExame;
-	}	
+	}
+        @ManyToOne(fetch = FetchType.EAGER)
+        public Consultas getConsulta() {
+               return consulta;
+        }
+
+        public void setConsulta(Consultas consulta) {
+              this.consulta = consulta;
+        }
+        
 
 }
