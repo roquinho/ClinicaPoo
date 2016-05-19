@@ -2,7 +2,6 @@ package br.upe.poo.clinica.entidades;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,16 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Exames implements Serializable {
 
     
         private Long idExame;
-	private Calendar dataExame;
-	private Calendar horaExame;
+	private Date dataExame;
+	private Date horaExame;
 	private String tipoExame;
 	private Pacientes paciente;
 	private ResultadosExames resultadoExame;
@@ -29,7 +26,7 @@ public class Exames implements Serializable {
 		 
 	 }
          
-	 public Exames(String tipoExame,Calendar dataExame,Calendar horaExame,Pacientes paciente) {
+	 public Exames(String tipoExame,Date dataExame,Date horaExame,Pacientes paciente) {
                  this.tipoExame = tipoExame;
                  this.dataExame = dataExame;
                  this.horaExame = horaExame;
@@ -38,13 +35,13 @@ public class Exames implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.idExame);
-        hash = 79 * hash + Objects.hashCode(this.dataExame);
-        hash = 79 * hash + Objects.hashCode(this.horaExame);
-        hash = 79 * hash + Objects.hashCode(this.tipoExame);
-        hash = 79 * hash + Objects.hashCode(this.paciente);
-        hash = 79 * hash + Objects.hashCode(this.resultadoExame);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.idExame);
+        hash = 23 * hash + Objects.hashCode(this.dataExame);
+        hash = 23 * hash + Objects.hashCode(this.horaExame);
+        hash = 23 * hash + Objects.hashCode(this.tipoExame);
+        hash = 23 * hash + Objects.hashCode(this.paciente);
+        hash = 23 * hash + Objects.hashCode(this.resultadoExame);
         return hash;
     }
 
@@ -94,18 +91,18 @@ public class Exames implements Serializable {
          public void setIdExame(Long idExame) {
                 this.idExame = idExame;
           }
-        @Temporal(TemporalType.DATE)  
-	public Calendar getDataExame() {
+         
+	public Date getDataExame() {
 		return dataExame;
 	  }
-	public void setDataExame(Calendar dataExame) {
+	public void setDataExame(Date dataExame) {
 		this.dataExame = dataExame;
 	}
-        @Temporal(TemporalType.TIME) 
-	public Calendar getHoraExame() {
+        
+	public Date getHoraExame() {
 		return horaExame;
 	}
-	public void setHoraExame(Calendar horaExame) {
+	public void setHoraExame(Date horaExame) {
 		this.horaExame = horaExame;
 	}
 	public String getTipoExame() {
@@ -121,7 +118,7 @@ public class Exames implements Serializable {
 	public void setPaciente(Pacientes paciente) {
 		this.paciente = paciente;
 	}
-        @OneToOne(fetch = FetchType.EAGER,mappedBy = "Exames")
+        @OneToOne(fetch = FetchType.EAGER,mappedBy = "exame")
 	public ResultadosExames getResultadoExame() {
 		return resultadoExame;
 	}

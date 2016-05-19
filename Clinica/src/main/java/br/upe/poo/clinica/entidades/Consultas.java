@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Consultas implements Serializable {
@@ -41,16 +39,17 @@ public class Consultas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.numeroConsulta);
-        hash = 47 * hash + Objects.hashCode(this.diaConsulta);
-        hash = 47 * hash + Objects.hashCode(this.horaConsulta);
-        hash = 47 * hash + Objects.hashCode(this.paciente);
-        hash = 47 * hash + (this.situacaoConsulta ? 1 : 0);
-        hash = 47 * hash + Objects.hashCode(this.dadosConsulta);
-        hash = 47 * hash + Objects.hashCode(this.medico);
-        hash = 47 * hash + Objects.hashCode(this.exames);
+        hash = 79 * hash + Objects.hashCode(this.numeroConsulta);
+        hash = 79 * hash + Objects.hashCode(this.diaConsulta);
+        hash = 79 * hash + Objects.hashCode(this.horaConsulta);
+        hash = 79 * hash + Objects.hashCode(this.paciente);
+        hash = 79 * hash + (this.situacaoConsulta ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.dadosConsulta);
+        hash = 79 * hash + Objects.hashCode(this.medico);
+        hash = 79 * hash + Objects.hashCode(this.exames);
         return hash;
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -104,14 +103,14 @@ public class Consultas implements Serializable {
                 public void setNumeroConsulta(Long numeroConsulta) {
                     this.numeroConsulta = numeroConsulta;
                  }
-                @Temporal(TemporalType.DATE)
+              
 		public Date getDiaConsulta() {
 			return diaConsulta;
 		}
 		public void setDiaConsulta(Date diaConsulta) {
 			this.diaConsulta = diaConsulta;
 		}
-                @Temporal(TemporalType.DATE)
+               
 		public Date getHoraConsulta() {
 			return horaConsulta;
 		}
@@ -131,7 +130,7 @@ public class Consultas implements Serializable {
 		public void setSituacaoConsulta(boolean situacaoConsulta) {
 			this.situacaoConsulta = situacaoConsulta;
 		}
-                @OneToOne(fetch = FetchType.EAGER,mappedBy = "Consultas")              
+                @OneToOne(fetch = FetchType.EAGER,mappedBy = "consulta")              
 		public DadosConsultas getDadosConsulta() {
 			return dadosConsulta;
 		}

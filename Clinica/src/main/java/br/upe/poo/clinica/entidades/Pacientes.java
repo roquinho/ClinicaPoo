@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Pacientes implements Serializable {
@@ -113,7 +111,7 @@ public class Pacientes implements Serializable {
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	} 
-        @Temporal(TemporalType.DATE) 
+         
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -158,14 +156,14 @@ public class Pacientes implements Serializable {
 		this.senha = senha;
 	}
 
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="Pacientes")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente")
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="Pacientes")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente")
 	public List<Exames> getExames() {
 		return exames;
 	}

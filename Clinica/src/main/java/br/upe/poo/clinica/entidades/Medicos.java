@@ -139,7 +139,7 @@ public class Medicos implements Serializable {
 		this.crm = crm;
 	}
         
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="Medicos")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="medico")
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}
