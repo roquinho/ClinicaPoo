@@ -1,7 +1,7 @@
 package br.upe.poo.clinica.entidades;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class DadosConsultas implements Serializable {
@@ -92,14 +94,14 @@ public class DadosConsultas implements Serializable {
     public void setConsulta(Consultas consulta) {
         this.consulta = consulta;
     }
-   
+  @Temporal(TemporalType.DATE) 
   public Date getInicioConsulta() {
       return this.inicioConsulta;
   }
   public void setInicioConsulta(Date inicioConsulta) {
       this.inicioConsulta = inicioConsulta;
   }
-  
+  @Temporal(TemporalType.DATE)
   public Date getFimConsulta() {
       return this.fimConsulta;
   }

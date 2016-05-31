@@ -1,7 +1,7 @@
 package br.upe.poo.clinica.entidades;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,11 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Exames implements Serializable {
-
-    
+   
         private Long idExame;
 	private Date dataExame;
 	private Date horaExame;
@@ -88,20 +89,21 @@ public class Exames implements Serializable {
     }
          @Id
          @GeneratedValue(strategy = GenerationType.IDENTITY)
-         public Long getIdExame() {
+        public Long getIdExame() {
                  return idExame;
           }
-         public void setIdExame(Long idExame) {
+        public void setIdExame(Long idExame) {
                 this.idExame = idExame;
           }
-         
+        
+        @Temporal(TemporalType.DATE)
 	public Date getDataExame() {
 		return dataExame;
 	  }
 	public void setDataExame(Date dataExame) {
 		this.dataExame = dataExame;
 	}
-        
+        @Temporal(TemporalType.DATE)
 	public Date getHoraExame() {
 		return horaExame;
 	}

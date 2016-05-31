@@ -4,41 +4,44 @@ package br.upe.poo.clinica.regraNegocio;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.persistencia.InterfaceRepositorioPacientes;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
-    
+    @Autowired
     private InterfaceRepositorioPacientes irp;
     
+      public RegraNegocioPaciente() {
+      }
     
     @Override
-    public void cadastrarPaciente(Pacientes paciente)throws RegraNegocioPacientesCadastrarException {
+    public void cadastrarPaciente(Pacientes paciente)throws ExceptionRegraNegocioPacientesCadastrar {
         if(paciente == null) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getNome()== null) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getCpf()==null) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getCpf()>11) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getCpf()<11) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getLoginNome()==null) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getSenha()==null) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getSenha().length()<5) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }           
         if(paciente.equals(irp.findByCpf(paciente.getCpf()))) {
-            throw new RegraNegocioPacientesCadastrarException();
+            throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         else {
             irp.save(paciente);
@@ -46,17 +49,17 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     }
 
     @Override
-    public Pacientes buscarPacienteCpf(Long cpf) throws RegraNegocioPacienteBuscarPacienteException {
+    public Pacientes buscarPacienteCpf(Long cpf) throws ExceptionRegraNegocioPacienteBuscarPaciente {
         Pacientes paciente = null;
         
        if(cpf == null){
-           throw new RegraNegocioPacienteBuscarPacienteException();
+           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
        }
        if(cpf>11) {
-           throw new RegraNegocioPacienteBuscarPacienteException();
+           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
        }
        if(cpf<11) {
-           throw new RegraNegocioPacienteBuscarPacienteException();
+           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
        }
        else {
            paciente = irp.findByCpf(cpf);
@@ -65,10 +68,10 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     }
 
     @Override
-    public List<Pacientes> buscarPacienteNome(String nome) throws RegraNegocioPacienteBuscarPacienteException {
+    public List<Pacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
           List<Pacientes> listaPacientes = null;
         if(nome == null) {
-          throw new RegraNegocioPacienteBuscarPacienteException();
+          throw new ExceptionRegraNegocioPacienteBuscarPaciente();
         }
         else {
             listaPacientes = irp.findByNome(nome);
@@ -77,33 +80,33 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     }
 
     @Override
-    public void atualizarPaciente(Pacientes paciente)throws RegraNegocioAtualizarPacientesException{
+    public void atualizarPaciente(Pacientes paciente)throws ExceptionRegraNegocioAtualizarPacientes{
        if(paciente == null) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getNome()== null) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getCpf()==null) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getCpf()>11) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getCpf()<11) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getLoginNome()==null) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getSenha()==null) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getSenha().length()<5) {
-            throw new RegraNegocioAtualizarPacientesException();
+            throw new ExceptionRegraNegocioAtualizarPacientes();
         } 
         if(paciente.equals(irp.findByCpf(paciente.getCpf())) == false) {
-            throw  new RegraNegocioAtualizarPacientesException();
+            throw  new ExceptionRegraNegocioAtualizarPacientes();
         }
         else {
             irp.save(paciente);
@@ -112,12 +115,12 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     }
 
     @Override
-    public void deletarPaciente(Pacientes paciente)throws RegraNegocioDeletarPacientesException{
+    public void deletarPaciente(Pacientes paciente)throws ExceptionRegraNegocioDeletarPacientes{
        if(paciente == null) {
-           throw new RegraNegocioDeletarPacientesException();
+           throw new ExceptionRegraNegocioDeletarPacientes();
        }
        if(paciente.equals(irp.findByCpf(paciente.getCpf()))==false) {
-           throw new RegraNegocioDeletarPacientesException();       
+           throw new ExceptionRegraNegocioDeletarPacientes();       
        }
        else {
           irp.delete(paciente);

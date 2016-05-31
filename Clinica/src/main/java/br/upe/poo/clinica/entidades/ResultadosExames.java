@@ -86,6 +86,5 @@ public class ResultadosExames implements Serializable {
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
     }
-    
-    
+        
 }

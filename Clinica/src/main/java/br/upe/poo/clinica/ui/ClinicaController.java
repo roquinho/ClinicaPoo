@@ -3,7 +3,7 @@ package br.upe.poo.clinica.ui;
 
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.regraNegocio.Fachada;
-import br.upe.poo.clinica.regraNegocio.RegraNegocioPacienteBuscarPacienteException;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioPacienteBuscarPaciente;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +38,7 @@ public class ClinicaController {
          Pacientes paciente = null;
         try {
             paciente = this.fachada.buscarPacienteCpf(cpf);
-        } catch (RegraNegocioPacienteBuscarPacienteException ex) {
+        } catch (ExceptionRegraNegocioPacienteBuscarPaciente ex) {
             Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
         }
        return paciente; 

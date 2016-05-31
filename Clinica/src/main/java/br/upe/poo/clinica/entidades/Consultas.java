@@ -2,7 +2,7 @@ package br.upe.poo.clinica.entidades;
 
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Consultas implements Serializable {
@@ -103,14 +105,16 @@ public class Consultas implements Serializable {
                 public void setNumeroConsulta(Long numeroConsulta) {
                     this.numeroConsulta = numeroConsulta;
                  }
-              
-		public Date getDiaConsulta() {
+                 
+                @Temporal(TemporalType.DATE)
+  		public Date getDiaConsulta() {
 			return diaConsulta;
 		}
 		public void setDiaConsulta(Date diaConsulta) {
 			this.diaConsulta = diaConsulta;
 		}
-               
+                
+                @Temporal(TemporalType.DATE)
 		public Date getHoraConsulta() {
 			return horaConsulta;
 		}
