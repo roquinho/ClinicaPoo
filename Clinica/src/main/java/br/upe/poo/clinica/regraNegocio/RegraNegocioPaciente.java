@@ -5,8 +5,9 @@ import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.persistencia.InterfaceRepositorioPacientes;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     @Autowired
     private InterfaceRepositorioPacientes irp;
