@@ -17,7 +17,7 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     
     @Override
     public void cadastrarPaciente(Pacientes paciente)throws ExceptionRegraNegocioPacientesCadastrar {
-        if(paciente == null) {
+        /*if(paciente == null) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         if(paciente.getNome()== null) {
@@ -40,7 +40,7 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
         }
         if(paciente.getSenha().length()<5) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
-        }           
+        } */          
         if(paciente.equals(irp.findByCpf(paciente.getCpf()))) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
         }
@@ -127,7 +127,9 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
           irp.delete(paciente);
        }
        
-    } 
+    }    
+
+    
     public InterfaceRepositorioPacientes getIrp() {
         return irp;
     }
@@ -135,4 +137,6 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     public void setIrp(InterfaceRepositorioPacientes irp) {
         this.irp = irp;
     }
+
+
 }

@@ -14,4 +14,5 @@ public interface InterfaceRepositorioPacientes extends CrudRepository<Pacientes,
     
     public List<Pacientes> findByNome(String nome);
     
+    
 }

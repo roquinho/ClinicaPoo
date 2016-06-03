@@ -36,4 +36,5 @@ public class FachadaImplementa implements Fachada {
         pacientes.deletarPaciente(paciente);
     }
     
+    
 }

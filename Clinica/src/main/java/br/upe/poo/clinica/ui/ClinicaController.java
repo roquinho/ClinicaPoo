@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/clinica")
+@RequestMapping("/Clinica")
 public class ClinicaController {
     
     @Autowired
@@ -54,7 +54,7 @@ public class ClinicaController {
         return listaPaciente;
     }
         
-    @RequestMapping("/clinica/atualizar")
+    @RequestMapping("/paciente/atualizar")
     public ResponseEntity<?> atualizarPaciente(Pacientes paciente) {
         try {
             this.fachada.atualizarPaciente(paciente);
@@ -63,7 +63,7 @@ public class ClinicaController {
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
-    @RequestMapping("/clinica/deletar")
+    @RequestMapping("/paciente/deletar")
     public ResponseEntity<?> deletarPaciente(Pacientes paciente) {
         try {
             this.fachada.deletarPaciente(paciente);
@@ -73,7 +73,6 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
         
     }
-    
 
     public Fachada getFachada() {
         return fachada;
