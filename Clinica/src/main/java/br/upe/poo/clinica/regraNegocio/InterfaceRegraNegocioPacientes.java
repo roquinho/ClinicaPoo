@@ -2,10 +2,11 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Pacientes;
+import java.io.Serializable;
 import java.util.List;
 
 
-public interface InterfaceRegraNegocioPacientes {
+public interface InterfaceRegraNegocioPacientes extends Serializable{
     
     public void cadastrarPaciente(Pacientes paciente)throws ExceptionRegraNegocioPacientesCadastrar;
     

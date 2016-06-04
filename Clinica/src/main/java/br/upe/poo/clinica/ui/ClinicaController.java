@@ -41,9 +41,9 @@ public class ClinicaController {
         } catch (ExceptionRegraNegocioPacienteBuscarPaciente ex) {
             Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       return paciente; 
+       return paciente;
     }
-    @RequestMapping(value = "/paciente/buscaCpf/",produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/paciente/buscaNome/",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Pacientes> buscarPacienteNome(String nome) {
         List<Pacientes> listaPaciente = null;
         try {

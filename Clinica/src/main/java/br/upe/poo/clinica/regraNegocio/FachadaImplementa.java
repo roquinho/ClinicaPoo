@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 public class FachadaImplementa implements Fachada {
     @Autowired
     private InterfaceRegraNegocioPacientes pacientes;
-
+      
+        public FachadaImplementa() {
+            
+        }
     @Override
     public void cadastrarPaciente(Pacientes paciente) throws ExceptionRegraNegocioPacientesCadastrar {
        pacientes.cadastrarPaciente(paciente);
