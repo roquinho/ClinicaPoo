@@ -40,13 +40,13 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
         }
         if(paciente.getSenha().length()<5) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
-        } */          
+        }          
         if(paciente.equals(irp.findByCpf(paciente.getCpf()))) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
-        }
-        else {
+        }*/
+        System.out.println(paciente.getNome());
             irp.save(paciente);
-        }
+             
     }
 
     @Override

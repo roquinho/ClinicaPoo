@@ -20,31 +20,34 @@ public class Medicos implements Serializable {
 	private String loginNome;
 	private String senha;
 	private Long crm;
+        private String especialidade;
 	private List<Consultas>consultas;
 	
 	 public Medicos() {
 		 
 	 }
-	 public Medicos(String nome,String senha,String endereco,Long telefone,String login,Long crm) {
+	 public Medicos(String nome,String senha,String endereco,Long telefone,String login,Long crm,String especialidade) {
 		 this.endereco = endereco;
 		 this.nome = nome;
 		 this.telefone = telefone;
 		 this.senha = senha;
 		 this.loginNome = login;
-		 this.crm = crm;		 
+		 this.crm = crm;
+                 this.especialidade = especialidade;
 	 }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.nome);
-        hash = 41 * hash + Objects.hashCode(this.cpf);
-        hash = 41 * hash + Objects.hashCode(this.endereco);
-        hash = 41 * hash + Objects.hashCode(this.telefone);
-        hash = 41 * hash + Objects.hashCode(this.loginNome);
-        hash = 41 * hash + Objects.hashCode(this.senha);
-        hash = 41 * hash + Objects.hashCode(this.crm);
-        hash = 41 * hash + Objects.hashCode(this.consultas);
+        hash = 59 * hash + Objects.hashCode(this.nome);
+        hash = 59 * hash + Objects.hashCode(this.cpf);
+        hash = 59 * hash + Objects.hashCode(this.endereco);
+        hash = 59 * hash + Objects.hashCode(this.telefone);
+        hash = 59 * hash + Objects.hashCode(this.loginNome);
+        hash = 59 * hash + Objects.hashCode(this.senha);
+        hash = 59 * hash + Objects.hashCode(this.crm);
+        hash = 59 * hash + Objects.hashCode(this.especialidade);
+        hash = 59 * hash + Objects.hashCode(this.consultas);
         return hash;
     }
 
@@ -72,7 +75,7 @@ public class Medicos implements Serializable {
         if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
-        if (!Objects.equals(this.cpf, other.cpf)) {
+        if (!Objects.equals(this.especialidade, other.especialidade)) {
             return false;
         }
         if (!Objects.equals(this.telefone, other.telefone)) {
@@ -89,9 +92,9 @@ public class Medicos implements Serializable {
 
     @Override
     public String toString() {
-        return "Medicos{" + "nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", loginNome=" + loginNome + ", senha=" + senha + ", crm=" + crm + ", consultas=" + consultas + '}';
+        return "Medicos{" + "nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", loginNome=" + loginNome + ", senha=" + senha + ", crm=" + crm + ", especialidade=" + especialidade + ", consultas=" + consultas + '}';
     }
-            
+    
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getCpf() {
@@ -138,7 +141,15 @@ public class Medicos implements Serializable {
 	public void setCrm(Long crm) {
 		this.crm = crm;
 	}
-        
+
+        public String getEspecialidade() {
+                return especialidade;
+        }
+
+        public void setEspecialidade(String especialidade) {
+                this.especialidade = especialidade;
+        }
+               
         @OneToMany(fetch = FetchType.EAGER,mappedBy="medico")
 	public List<Consultas> getConsultas() {
 		return consultas;

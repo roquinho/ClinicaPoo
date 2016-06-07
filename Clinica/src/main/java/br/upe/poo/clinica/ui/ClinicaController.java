@@ -1,9 +1,9 @@
 
 package br.upe.poo.clinica.ui;
 
+import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.regraNegocio.Fachada;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioPacienteBuscarPaciente;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,11 +21,11 @@ public class ClinicaController {
     @Autowired
     private Fachada fachada;
     
-    
     @RequestMapping("/paciente/add")
     public ResponseEntity<?> cadastrarPaciente(Pacientes paciente) {
-        
+        paciente.setNome("manoel");
         try {
+            System.out.println("entrou aqui");
            this.fachada.cadastrarPaciente(paciente);
         }catch(Exception e) {
             return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
@@ -38,7 +38,7 @@ public class ClinicaController {
          Pacientes paciente = null;
         try {
             paciente = this.fachada.buscarPacienteCpf(cpf);
-        } catch (ExceptionRegraNegocioPacienteBuscarPaciente ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
         }
        return paciente;
@@ -67,6 +67,56 @@ public class ClinicaController {
     public ResponseEntity<?> deletarPaciente(Pacientes paciente) {
         try {
             this.fachada.deletarPaciente(paciente);
+        } catch (Exception e) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST); 
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+        
+    }
+    //controller de medicos------------------------------------------------------
+    
+    @RequestMapping("/medico/add")
+    public ResponseEntity<?> cadastrarMedico(Medicos medico) {
+        try {
+            this.fachada.cadastrarMedicos(medico);
+        } catch (Exception e) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    @RequestMapping("/medico/buscaCpf")
+    public Medicos buscarMedicoCpf(Long cpf) { 
+        Medicos medico = null;
+        try {
+            medico = this.fachada.buscarMedicoCpf(cpf);
+        } catch (Exception ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return medico;
+    }
+    @RequestMapping("/medico/buscaNome")
+    public List<Medicos> buscarMedicoNome(String nome) {
+        List<Medicos> medicos = null;
+        try {
+            this.fachada.buscarMedicoNome(nome);
+        } catch (Exception ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return medicos;
+    }
+    @RequestMapping("/medico/atualizar")
+    public ResponseEntity<?> atualizarMedico(Medicos medico) {
+        try {
+            this.fachada.atualizarMedico(medico);
+        } catch (Exception e) {
+             return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    @RequestMapping("/medico/deletar")
+    public ResponseEntity<?> deletarMedico(Medicos medico) {
+        try {
+            this.fachada.deletarMedico(medico);
         } catch (Exception e) {
            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST); 
         }
