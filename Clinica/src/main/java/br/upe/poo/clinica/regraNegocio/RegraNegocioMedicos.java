@@ -22,7 +22,7 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
       }
     @Override
     public void cadastrarMedicos(Medicos medico) throws ExceptionRegraNegocioCadastrarMedicos {
-       /* if(medico==null) {
+        if(medico==null) {
             throw new ExceptionRegraNegocioCadastrarMedicos();
         }
         if(medico.getNome()==null) {
@@ -39,10 +39,10 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
         }
         if(medico.equals(irm.findByCpf(medico.getCpf()))) {
             throw new ExceptionRegraNegocioCadastrarMedicos();
-        }*/
-        
+        }
+        else {
             irm.save(medico);
-        
+        }
     }
 
     @Override

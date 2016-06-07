@@ -19,7 +19,6 @@ public class FachadaImplementa implements Fachada {
         }
     @Override
     public void cadastrarPaciente(Pacientes paciente) throws ExceptionRegraNegocioPacientesCadastrar {
-        System.out.println("entrou na fachada");
        this.pacientes.cadastrarPaciente(paciente);
     }
 

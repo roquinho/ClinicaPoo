@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,10 +23,8 @@ public class ClinicaController {
     private Fachada fachada;
     
     @RequestMapping("/paciente/add")
-    public ResponseEntity<?> cadastrarPaciente(Pacientes paciente) {
-        paciente.setNome("manoel");
+    public ResponseEntity<?> cadastrarPaciente(@RequestBody Pacientes paciente) {
         try {
-            System.out.println("entrou aqui");
            this.fachada.cadastrarPaciente(paciente);
         }catch(Exception e) {
             return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
@@ -55,7 +54,7 @@ public class ClinicaController {
     }
         
     @RequestMapping("/paciente/atualizar")
-    public ResponseEntity<?> atualizarPaciente(Pacientes paciente) {
+    public ResponseEntity<?> atualizarPaciente(@RequestBody Pacientes paciente) {
         try {
             this.fachada.atualizarPaciente(paciente);
         } catch (Exception e) {
@@ -64,7 +63,7 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     @RequestMapping("/paciente/deletar")
-    public ResponseEntity<?> deletarPaciente(Pacientes paciente) {
+    public ResponseEntity<?> deletarPaciente(@RequestBody Pacientes paciente) {
         try {
             this.fachada.deletarPaciente(paciente);
         } catch (Exception e) {
@@ -76,7 +75,7 @@ public class ClinicaController {
     //controller de medicos------------------------------------------------------
     
     @RequestMapping("/medico/add")
-    public ResponseEntity<?> cadastrarMedico(Medicos medico) {
+    public ResponseEntity<?> cadastrarMedico(@RequestBody Medicos medico) {
         try {
             this.fachada.cadastrarMedicos(medico);
         } catch (Exception e) {
@@ -105,7 +104,7 @@ public class ClinicaController {
         return medicos;
     }
     @RequestMapping("/medico/atualizar")
-    public ResponseEntity<?> atualizarMedico(Medicos medico) {
+    public ResponseEntity<?> atualizarMedico(@RequestBody Medicos medico) {
         try {
             this.fachada.atualizarMedico(medico);
         } catch (Exception e) {
@@ -114,7 +113,7 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     @RequestMapping("/medico/deletar")
-    public ResponseEntity<?> deletarMedico(Medicos medico) {
+    public ResponseEntity<?> deletarMedico(@RequestBody Medicos medico) {
         try {
             this.fachada.deletarMedico(medico);
         } catch (Exception e) {
