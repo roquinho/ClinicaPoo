@@ -68,7 +68,6 @@ public class Usuario implements Serializable {
     }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getCpf() {
         return cpf;
     }
