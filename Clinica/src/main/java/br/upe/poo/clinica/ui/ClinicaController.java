@@ -3,6 +3,7 @@ package br.upe.poo.clinica.ui;
 
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.entidades.Usuario;
 import br.upe.poo.clinica.regraNegocio.Fachada;
 import java.util.List;
 import java.util.logging.Level;
@@ -103,6 +104,18 @@ public class ClinicaController {
         }
         return medicos;
     }
+    
+    @RequestMapping("/medico/buscaEspecialidade")
+    public List<Medicos> buscarMedicoEspecialidade(String especialidade) {
+       List<Medicos> medicos = null;
+        try {
+            this.fachada.buscarMedicoEspecialidade(especialidade);
+        } catch (Exception ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return medicos; 
+    }
+    
     @RequestMapping("/medico/atualizar")
     public ResponseEntity<?> atualizarMedico(@RequestBody Medicos medico) {
         try {
@@ -112,10 +125,55 @@ public class ClinicaController {
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
+    
     @RequestMapping("/medico/deletar")
     public ResponseEntity<?> deletarMedico(@RequestBody Medicos medico) {
         try {
             this.fachada.deletarMedico(medico);
+        } catch (Exception e) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST); 
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+        
+    }
+    
+    //Contrloller dos usuarios---------------------------
+    
+    @RequestMapping("/usuario/add")
+    public ResponseEntity<?> cadastrarUsuario(@RequestBody Usuario usuario) {
+        try {
+            this.fachada.cadastarUsuario(usuario);
+        } catch (Exception e) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping("/usuario/buscaCpf")
+    public Usuario filtrarUsuarioCpf(Long cpf) { 
+        Usuario usuario = null;
+        try {
+            usuario = this.fachada.filtrarUsuarioCpf(cpf);
+        } catch (Exception ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usuario;
+    }
+
+    @RequestMapping("/usuario/atualizar")
+    public ResponseEntity<?> atualizarUsuario(@RequestBody Usuario usuario) {
+        try {
+            this.fachada.atualizarUsuario(usuario);
+        } catch (Exception e) {
+             return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping("/usuario/deletar")
+    public ResponseEntity<?> deletarUsuario(@RequestBody Usuario usuario) {
+        try {
+            this.fachada.deletarUsuario(usuario);
         } catch (Exception e) {
            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST); 
         }

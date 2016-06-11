@@ -16,6 +16,8 @@ public interface InterfaceRegraNegocioMedicos {
     
     public List<Medicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
     
+    public List<Medicos> buscarMedicoEspecialidade(String especialidade)throws ExceptionRegraNegocioBuscarMedicos;
+    
     public void atualizarMedico(Medicos medico)throws ExceptionRegraNegocioAtualizarMedicos;
     
     public void deletarMedico(Medicos medico)throws ExceptionRegraNegocioDeletarMedicos;

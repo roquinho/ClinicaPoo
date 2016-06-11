@@ -3,6 +3,7 @@ package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.entidades.Usuario;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public class FachadaImplementa implements Fachada {
     private InterfaceRegraNegocioPacientes pacientes;
     @Autowired
     private InterfaceRegraNegocioMedicos medicos;
+    @Autowired
+    private InterfaceRegraNegocioUsuario usuarios;
       
         public FachadaImplementa() {
             
@@ -56,6 +59,11 @@ public class FachadaImplementa implements Fachada {
     public List<Medicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
         return this.medicos.buscarMedicoNome(nome);
     }
+    
+    @Override
+    public List<Medicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
+        return this.medicos.buscarMedicoEspecialidade(especialidade);
+    }
 
     @Override
     public void atualizarMedico(Medicos medico) throws ExceptionRegraNegocioAtualizarMedicos {
@@ -66,6 +74,27 @@ public class FachadaImplementa implements Fachada {
     public void deletarMedico(Medicos medico) throws ExceptionRegraNegocioDeletarMedicos {
         this.medicos.deletarMedico(medico);
     }
+
+    @Override
+    public void cadastarUsuario(Usuario usuario) throws ExceptionRegraNegocioCadastrarUsuario {
+        this.usuarios.cadastarUsuario(usuario);
+    }
+
+    @Override
+    public Usuario filtrarUsuarioCpf(Long cpf) throws ExceptionRegraNegocioFiltrarUsuario {
+        return this.usuarios.filtrarUsuarioCpf(cpf);
+    }
+
+    @Override
+    public void atualizarUsuario(Usuario usuario) throws ExceptionRegraNegocioAtualizarUsuario {
+        this.usuarios.atualizarUsuario(usuario);
+    }
+
+    @Override
+    public void deletarUsuario(Usuario usuario) throws ExceptionRegraNegocioDeletarUsuario {
+        this.usuarios.deletarUsuario(usuario);
+    }
+
     
     
 }

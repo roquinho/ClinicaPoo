@@ -37,7 +37,7 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
         if(medico.getEspecialidade()==null) {
             throw new ExceptionRegraNegocioCadastrarMedicos();
         }
-        if(medico.equals(irm.findByCpf(medico.getCpf()))) {
+        if(irm.findByCpf(medico.getCpf())!=null) {
             throw new ExceptionRegraNegocioCadastrarMedicos();
         }
         else {
@@ -68,6 +68,18 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
     }
          return medicos;
     }
+    
+    @Override
+    public List<Medicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
+      List<Medicos> medicos = null;
+         if(especialidade==null) {
+             throw new ExceptionRegraNegocioBuscarMedicos();
+         }
+         else {
+          medicos = irm.findByEspecialidade(especialidade);
+    }
+         return medicos;
+    }
 
     @Override
     public void atualizarMedico(Medicos medico) throws ExceptionRegraNegocioAtualizarMedicos {
@@ -86,7 +98,7 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
         if(medico.getEspecialidade()==null) {
             throw new ExceptionRegraNegocioAtualizarMedicos();
         }
-        if(medico.equals(irm.findByCpf(medico.getCpf()))) {
+        if(irm.findByCpf(medico.getCpf())==null) {
             throw new ExceptionRegraNegocioAtualizarMedicos();
         }
         else {
@@ -99,8 +111,11 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
         if(medico == null) {
             throw new ExceptionRegraNegocioDeletarMedicos();
         }
-        if(medico.equals(irm.findByCpf(medico.getCpf()))==false) {
-           irm.delete(medico);
+        if(irm.findByCpf(medico.getCpf())==null) {
+            throw new ExceptionRegraNegocioDeletarMedicos();
+        }
+        else {
+            irm.delete(medico);
         }
     }
 
@@ -111,5 +126,6 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
     public void setIrm(InterfaceMedicosRepositorio irm) {
         this.irm = irm;
     }
+
     
 }

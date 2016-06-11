@@ -6,4 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface InterfaceUsuarioRepositorio extends CrudRepository<Usuario, Long>{
     
+    public Usuario findByCpf(Long cpf);
+    
 }

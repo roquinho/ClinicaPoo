@@ -31,8 +31,8 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
         }
         if(paciente.getSenha()==null) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
-        }          
-        if(paciente.equals(irp.findByCpf(paciente.getCpf()))) {
+        }
+        if(irp.findByCpf(paciente.getCpf())!= null) {
             throw new ExceptionRegraNegocioPacientesCadastrar();
         }
         else {
@@ -45,12 +45,6 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
         Pacientes paciente = null;
         
        if(cpf == null){
-           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
-       }
-       if(cpf>11) {
-           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
-       }
-       if(cpf<11) {
            throw new ExceptionRegraNegocioPacienteBuscarPaciente();
        }
        else {
@@ -73,7 +67,7 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
 
     @Override
     public void atualizarPaciente(Pacientes paciente)throws ExceptionRegraNegocioAtualizarPacientes{
-       if(paciente == null) {
+        if(paciente == null) {
             throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getNome()== null) {
@@ -82,23 +76,14 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
         if(paciente.getCpf()==null) {
             throw new ExceptionRegraNegocioAtualizarPacientes();
         }
-        if(paciente.getCpf()>11) {
-            throw new ExceptionRegraNegocioAtualizarPacientes();
-        }
-        if(paciente.getCpf()<11) {
-            throw new ExceptionRegraNegocioAtualizarPacientes();
-        }
         if(paciente.getLoginNome()==null) {
             throw new ExceptionRegraNegocioAtualizarPacientes();
         }
         if(paciente.getSenha()==null) {
             throw new ExceptionRegraNegocioAtualizarPacientes();
         }
-        if(paciente.getSenha().length()<5) {
+        if(irp.findByCpf(paciente.getCpf())== null) {
             throw new ExceptionRegraNegocioAtualizarPacientes();
-        } 
-        if(paciente.equals(irp.findByCpf(paciente.getCpf())) == false) {
-            throw  new ExceptionRegraNegocioAtualizarPacientes();
         }
         else {
             irp.save(paciente);
@@ -110,10 +95,11 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     public void deletarPaciente(Pacientes paciente)throws ExceptionRegraNegocioDeletarPacientes{
        if(paciente == null) {
            throw new ExceptionRegraNegocioDeletarPacientes();
-       }
-       if(paciente.equals(irp.findByCpf(paciente.getCpf()))==false) {
-           throw new ExceptionRegraNegocioDeletarPacientes();       
-       }
+       }      
+       if(irp.findByCpf(paciente.getCpf())== null) {
+            throw new ExceptionRegraNegocioDeletarPacientes();
+        }
+ 
        else {
           irp.delete(paciente);
        }
