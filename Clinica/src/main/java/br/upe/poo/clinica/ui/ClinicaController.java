@@ -43,7 +43,7 @@ public class ClinicaController {
         }
        return paciente;
     }
-    @RequestMapping(value = "/paciente/buscaNome/",produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/paciente/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Pacientes> buscarPacienteNome(String nome) {
         List<Pacientes> listaPaciente = null;
         try {
@@ -98,7 +98,7 @@ public class ClinicaController {
     public List<Medicos> buscarMedicoNome(String nome) {
         List<Medicos> medicos = null;
         try {
-            this.fachada.buscarMedicoNome(nome);
+            medicos = this.fachada.buscarMedicoNome(nome);
         } catch (Exception ex) {
             Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +109,7 @@ public class ClinicaController {
     public List<Medicos> buscarMedicoEspecialidade(String especialidade) {
        List<Medicos> medicos = null;
         try {
-            this.fachada.buscarMedicoEspecialidade(especialidade);
+           medicos =  this.fachada.buscarMedicoEspecialidade(especialidade);
         } catch (Exception ex) {
             Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
         }
