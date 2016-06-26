@@ -3,7 +3,6 @@ package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Consultas;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *

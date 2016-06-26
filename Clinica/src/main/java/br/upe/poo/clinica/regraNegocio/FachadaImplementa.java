@@ -2,6 +2,7 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Consultas;
+import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
@@ -19,6 +20,8 @@ public class FachadaImplementa implements Fachada {
     private InterfaceRegraNegocioUsuario usuarios;
     @Autowired
     private InterfaceRegraNegocioConsultas consultas;
+    @Autowired
+    private InterfaceRegraNegocioExames exames;
       
         public FachadaImplementa() {
             
@@ -116,6 +119,31 @@ public class FachadaImplementa implements Fachada {
     @Override
     public void deletarConsultas(Long codigoConsulta) throws ExceptionRegraNegocioDeletarConsultas {
         this.consultas.deletarConsultas(codigoConsulta);
+    }
+
+    @Override
+    public void agendarExame(Exames exame, Long pacienteCpf, Long codigoConsulta) throws ExceptionRegraNegocioAgendarExame {
+        this.exames.agendarExame(exame, pacienteCpf, codigoConsulta);
+    }
+
+    @Override
+    public Exames filtrarExameCodigo(Long codigoExame) throws ExceptionRegraNegocioFiltrarExame {
+        return this.exames.filtrarExameCodigo(codigoExame);
+    }
+
+    @Override
+    public void atualizarExame(Exames exame) throws ExceptionRegraNegocioAtualizarExames {
+        this.exames.atualizarExame(exame);
+    }
+
+    @Override
+    public void deletarExame(Long codigoExame) throws ExceptionRegraNegocioDeletarExames {
+        this.exames.deletarExame(codigoExame);
+    }
+
+    @Override
+    public List<Exames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
+        return this.exames.filtrarTipoExame(tipoExame);
     }
     
 }

@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 public class Exames implements Serializable {
    
         private Long idExame;
+        private Long codigoExame;
 	private Date dataExame;
 	private Date horaExame;
 	private String tipoExame;
@@ -28,23 +29,24 @@ public class Exames implements Serializable {
 		 
 	 }
          
-	 public Exames(String tipoExame,Date dataExame,Date horaExame,Pacientes paciente) {
+	 public Exames(String tipoExame,Date dataExame,Date horaExame,Long codigoExame) {
                  this.tipoExame = tipoExame;
                  this.dataExame = dataExame;
                  this.horaExame = horaExame;
-                 this.paciente = paciente;
+                 this.codigoExame = codigoExame;
 	 }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.idExame);
-        hash = 97 * hash + Objects.hashCode(this.dataExame);
-        hash = 97 * hash + Objects.hashCode(this.horaExame);
-        hash = 97 * hash + Objects.hashCode(this.tipoExame);
-        hash = 97 * hash + Objects.hashCode(this.paciente);
-        hash = 97 * hash + Objects.hashCode(this.resultadoExame);
-        hash = 97 * hash + Objects.hashCode(this.consulta);
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.idExame);
+        hash = 59 * hash + Objects.hashCode(this.codigoExame);
+        hash = 59 * hash + Objects.hashCode(this.dataExame);
+        hash = 59 * hash + Objects.hashCode(this.horaExame);
+        hash = 59 * hash + Objects.hashCode(this.tipoExame);
+        hash = 59 * hash + Objects.hashCode(this.paciente);
+        hash = 59 * hash + Objects.hashCode(this.resultadoExame);
+        hash = 59 * hash + Objects.hashCode(this.consulta);
         return hash;
     }
 
@@ -64,6 +66,9 @@ public class Exames implements Serializable {
             return false;
         }
         if (!Objects.equals(this.idExame, other.idExame)) {
+            return false;
+        }
+        if (!Objects.equals(this.codigoExame, other.codigoExame)) {
             return false;
         }
         if (!Objects.equals(this.dataExame, other.dataExame)) {
@@ -86,8 +91,9 @@ public class Exames implements Serializable {
 
     @Override
     public String toString() {
-        return "Exames{" + "idExame=" + idExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", resultadoExame=" + resultadoExame + ", consulta=" + consulta + '}';
+        return "Exames{" + "idExame=" + idExame + ", codigoExame=" + codigoExame + ", dataExame=" + dataExame + ", horaExame=" + horaExame + ", tipoExame=" + tipoExame + ", paciente=" + paciente + ", resultadoExame=" + resultadoExame + ", consulta=" + consulta + '}';
     }
+    
          @Id
          @GeneratedValue(strategy = GenerationType.IDENTITY)
         public Long getIdExame() {
@@ -104,6 +110,13 @@ public class Exames implements Serializable {
 	public void setDataExame(Date dataExame) {
 		this.dataExame = dataExame;
 	}
+
+        public Long getCodigoExame() {
+                return codigoExame;
+        }
+        public void setCodigoExame(Long codigoExame) {
+               this.codigoExame = codigoExame;
+        }
         @Temporal(TemporalType.DATE)
 	public Date getHoraExame() {
 		return horaExame;

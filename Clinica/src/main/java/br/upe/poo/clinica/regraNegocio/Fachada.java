@@ -2,6 +2,7 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Consultas;
+import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
@@ -53,5 +54,18 @@ public interface Fachada extends Serializable {
     public void atualizarConsulta(Consultas consulta)throws ExceptionRegraNegocioAtualizarConsultas;
     
     public void deletarConsultas(Long codigoConsulta)throws ExceptionRegraNegocioDeletarConsultas;
+    
+    
+    
+    
+    public void agendarExame(Exames exame,Long pacienteCpf,Long codigoConsulta)throws ExceptionRegraNegocioAgendarExame;
+    
+    public Exames filtrarExameCodigo(Long codigoExame)throws ExceptionRegraNegocioFiltrarExame;
+    
+    public List<Exames> filtrarTipoExame(String tipoExame)throws ExceptionRegraNegocioFiltrarExame;
+    
+    public void atualizarExame(Exames exame)throws ExceptionRegraNegocioAtualizarExames;
+    
+    public void deletarExame(Long codigoExame)throws ExceptionRegraNegocioDeletarExames;
 
 }

@@ -30,7 +30,7 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     @Override
     public void agendarConsulta(Consultas consulta,Long PacienteCpf,Long MedicoCpf) throws ExceptionRegraNegocioAgendarConsultas {
         
-       Pacientes paciente = irp.findByCpf(PacienteCpf);System.out.println(paciente.getNome());
+       Pacientes paciente = irp.findByCpf(PacienteCpf);
        Medicos medico = irm.findByCpf(MedicoCpf);
             
         if(consulta == null) {
@@ -66,6 +66,7 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     @Override
     public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
         Consultas consultas = null;
+        
         if(codigoConsulta == null) {
             throw new ExceptionRegraNegocioFiltrarConsultas();
         }
@@ -82,12 +83,12 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
         if(Novaconsulta == null) {
             throw new ExceptionRegraNegocioAtualizarConsultas();
         }
-        /*if(Novaconsulta.getPaciente()== null) {
+        if(Novaconsulta.getPaciente()== null) {
             throw new ExceptionRegraNegocioAtualizarConsultas();
         }
         if(Novaconsulta.getMedico() == null) {
             throw new ExceptionRegraNegocioAtualizarConsultas();
-        }*/
+        }
         if(Novaconsulta.getDiaConsulta()==null) {
             throw new ExceptionRegraNegocioAtualizarConsultas();
         }

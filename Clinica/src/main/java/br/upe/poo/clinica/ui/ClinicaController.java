@@ -2,10 +2,15 @@
 package br.upe.poo.clinica.ui;
 
 import br.upe.poo.clinica.entidades.Consultas;
+import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioAgendarExame;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioAtualizarExames;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDeletarExames;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarConsultas;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarExame;
 import br.upe.poo.clinica.regraNegocio.Fachada;
 import java.util.List;
 import java.util.logging.Level;
@@ -183,6 +188,7 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
         
     }
+    /*---------------------consultas----------------------------------------------------*/
     
     @RequestMapping("/consulta/agendar")
     public ResponseEntity<?> agendarConsulta(@RequestBody Consultas consulta, @RequestParam Long pacienteCpf, @RequestParam Long medicoCpf) {
@@ -226,7 +232,60 @@ public class ClinicaController {
         }
            return new ResponseEntity<String>(HttpStatus.OK);
         }
-
+/*-------------------------exames----------------------------------------------*/
+    
+    @RequestMapping("/exame/agendar")
+    public ResponseEntity<?> agendarExame(@RequestBody Exames exame,@RequestParam Long pacienteCpf,@RequestParam Long codigoConsulta) {
+        try {
+            this.fachada.agendarExame(exame, pacienteCpf, codigoConsulta);
+        } catch (Exception ex) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/exame/filtrarCodigo",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Exames filtrarExameCodigo(@RequestParam Long codigoExame) {
+       Exames exame = null;
+        try {
+            exame = this.fachada.filtrarExameCodigo(codigoExame);
+        } catch (ExceptionRegraNegocioFiltrarExame ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exame;
+    }
+    
+    @RequestMapping(value = "/exame/filtrarTipoExame",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Exames> filtrarExameTipoExame(@RequestParam String tipoExame) {
+        List<Exames> exames = null;
+        try {
+            exames = this.fachada.filtrarTipoExame(tipoExame);
+        } catch (ExceptionRegraNegocioFiltrarExame ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return exames;
+    }
+    
+    @RequestMapping("/exame/atualizar")
+    public ResponseEntity<?> atualizarExame(@RequestBody Exames exame) {
+        try {
+            this.fachada.atualizarExame(exame);
+        } catch (Exception ex) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+        }
+    
+    @RequestMapping("/exame/deletar")
+    public ResponseEntity<?> deletarExame(@RequestParam Long codigoExame) {
+        try {
+            this.fachada.deletarExame(codigoExame);
+        } catch (Exception ex) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+        }
+        
     public Fachada getFachada() {
         return fachada;
     }
