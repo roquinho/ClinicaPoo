@@ -73,7 +73,7 @@ public class RegraNegocioDadosConsulta implements InterfaceRegraNegocioDadosCons
         if(novosDadosConsulta == null) {
             throw new ExceptionRegraNegocioDadosConsultasAtualizar();
         }
-        if(novosDadosConsulta == null) {
+        if(novosDadosConsulta.getConsulta() == null) {
             throw new ExceptionRegraNegocioDadosConsultasAtualizar();
         }
         if(novosDadosConsulta.getIdDadosConsulta()== null) {

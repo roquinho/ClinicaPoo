@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -19,8 +17,8 @@ public class ResultadosExames implements Serializable {
       public ResultadosExames() {
           
       }      
-      public ResultadosExames(Exames exame){
-          this.exame = exame;
+      public ResultadosExames(String diagnostico) {
+          this.diagnostico = diagnostico;
       }
 
     @Override
@@ -62,7 +60,6 @@ public class ResultadosExames implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdResultadoExames() {
         return idResultadoExames;
     }

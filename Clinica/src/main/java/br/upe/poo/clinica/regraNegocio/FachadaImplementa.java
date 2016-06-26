@@ -6,6 +6,7 @@ import br.upe.poo.clinica.entidades.DadosConsultas;
 import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class FachadaImplementa implements Fachada {
     private InterfaceRegraNegocioExames exames;
     @Autowired
     private InterfaceRegraNegocioDadosConsulta dadosConsulta;
+    @Autowired
+    private InterfaceRegraNegocioResultadoExames resultadoExames;
       
         public FachadaImplementa() {
             
@@ -167,6 +170,26 @@ public class FachadaImplementa implements Fachada {
     @Override
     public void deletarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasDeletar {
         this.dadosConsulta.deletarDadosConsulta(idDadosConsulta);
+    }
+
+    @Override
+    public void gerarResultadoExames(ResultadosExames resultadoExames, Long codigoExame) throws ExceptionRegraNegocioResultadosExamesGerar {
+        this.resultadoExames.gerarResultadoExames(resultadoExames, codigoExame);
+    }
+
+    @Override
+    public ResultadosExames filtrarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesFiltrar {
+        return this.resultadoExames.filtrarResultadoExame(idResultadoExames);
+    }
+
+    @Override
+    public void atualizarResultadoExame(ResultadosExames resultadosExames) throws ExceptionRegraNegocioResultadosExamesAtualizar {
+        this.resultadoExames.atualizarResultadoExame(resultadosExames);
+    }
+
+    @Override
+    public void deletarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesDeletar {
+        this.resultadoExames.deletarResultadoExame(idResultadoExames);
     }
     
 }

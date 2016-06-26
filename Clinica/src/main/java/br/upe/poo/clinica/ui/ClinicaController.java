@@ -6,16 +6,15 @@ import br.upe.poo.clinica.entidades.DadosConsultas;
 import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioAgendarExame;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioAtualizarExames;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasAtualizar;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasDeletar;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasFiltrar;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasGerar;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDeletarExames;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarConsultas;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarExame;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesAtualizar;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesDeletar;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesFiltrar;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesGerar;
 import br.upe.poo.clinica.regraNegocio.Fachada;
 import java.util.List;
 import java.util.logging.Level;
@@ -322,8 +321,8 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK); 
         }
     
-     @RequestMapping("/dadosConsulta/deletar")
-     public ResponseEntity<?> deletarDadosConsulta(@RequestParam Long idDadosConsulta) {
+    @RequestMapping("/dadosConsulta/deletar")
+    public ResponseEntity<?> deletarDadosConsulta(@RequestParam Long idDadosConsulta) {
         try {
             this.fachada.deletarDadosConsulta(idDadosConsulta);
         } catch (Exception ex) {
@@ -332,8 +331,49 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK); 
         }
      
+    @RequestMapping("/resultadoExames/gerar")
+    public ResponseEntity<?> gerarResultadoExame(@RequestBody ResultadosExames resultadosExames, @RequestParam Long codigoExame) {
+        try {
+            this.fachada.gerarResultadoExames(resultadosExames, codigoExame);
+        } catch (Exception ex) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK); 
+        
+    }
             
-            
+    @RequestMapping(value = "/resultadoExames/filtrar",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResultadosExames filtrarResultadoExame(@RequestParam Long idResultadoExame) {
+        ResultadosExames resultadosExames = null;
+        try {
+            resultadosExames = this.fachada.filtrarResultadoExame(idResultadoExame);
+        } catch (ExceptionRegraNegocioResultadosExamesFiltrar ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadosExames;
+    }
+    
+    @RequestMapping("/resultadoExames/atualizar")
+    public ResponseEntity<?> atualizarResultadoExame(@RequestBody ResultadosExames resultadosExames) {
+        try {
+            this.fachada.atualizarResultadoExame(resultadosExames);
+        } catch (Exception ex) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);         
+    }
+    
+    @RequestMapping("/resultadoExames/deletar")
+    public ResponseEntity<?> deletarResultadoExames(@RequestParam Long idResultadoExame) {
+        try {
+            this.fachada.deletarResultadoExame(idResultadoExame);
+        } catch (Exception ex) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK); 
+        
+    }
+    
     public Fachada getFachada() {
         return fachada;
     }

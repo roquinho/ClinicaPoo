@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface InterfaceResultadosExamesRepositorio extends CrudRepository<ResultadosExames, Long>{
     
+    public ResultadosExames findByIdResultadoExames(Long idResultadoExames);
 }
