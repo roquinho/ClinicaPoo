@@ -1,6 +1,7 @@
 
 package br.upe.poo.clinica.regraNegocio;
 
+import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
@@ -42,7 +43,15 @@ public interface Fachada extends Serializable {
     public void atualizarUsuario(Usuario usuario)throws ExceptionRegraNegocioAtualizarUsuario;
     
     public void deletarUsuario(Usuario usuario)throws ExceptionRegraNegocioDeletarUsuario;
-
-
     
+
+
+    public void agendarConsulta(Consultas consulta,Long pacienteCpf,Long medicoCpf)throws ExceptionRegraNegocioAgendarConsultas;
+    
+    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta)throws ExceptionRegraNegocioFiltrarConsultas;
+    
+    public void atualizarConsulta(Consultas consulta)throws ExceptionRegraNegocioAtualizarConsultas;
+    
+    public void deletarConsultas(Long codigoConsulta)throws ExceptionRegraNegocioDeletarConsultas;
+
 }

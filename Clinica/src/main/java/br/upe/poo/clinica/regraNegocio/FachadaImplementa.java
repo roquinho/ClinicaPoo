@@ -1,6 +1,7 @@
 
 package br.upe.poo.clinica.regraNegocio;
 
+import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
@@ -16,6 +17,8 @@ public class FachadaImplementa implements Fachada {
     private InterfaceRegraNegocioMedicos medicos;
     @Autowired
     private InterfaceRegraNegocioUsuario usuarios;
+    @Autowired
+    private InterfaceRegraNegocioConsultas consultas;
       
         public FachadaImplementa() {
             
@@ -95,6 +98,24 @@ public class FachadaImplementa implements Fachada {
         this.usuarios.deletarUsuario(usuario);
     }
 
-    
+    @Override
+    public void agendarConsulta(Consultas consulta,Long pacienteCpf,Long medicoCpf) throws ExceptionRegraNegocioAgendarConsultas {
+        this.consultas.agendarConsulta(consulta,pacienteCpf,medicoCpf);
+    }
+
+    @Override
+    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
+        return this.consultas.filtrarConsultaCodigoConsulta(codigoConsulta);
+    }
+
+    @Override
+    public void atualizarConsulta(Consultas consulta) throws ExceptionRegraNegocioAtualizarConsultas {
+        this.consultas.atualizarConsulta(consulta);
+    }
+
+    @Override
+    public void deletarConsultas(Long codigoConsulta) throws ExceptionRegraNegocioDeletarConsultas {
+        this.consultas.deletarConsultas(codigoConsulta);
+    }
     
 }

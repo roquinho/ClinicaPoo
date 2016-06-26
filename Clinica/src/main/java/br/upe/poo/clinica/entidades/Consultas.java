@@ -20,10 +20,11 @@ import javax.persistence.TemporalType;
 public class Consultas implements Serializable {
     
         private Long numeroConsulta;
+        private Long codigoConsulta;
+        private boolean situacaoConsulta;
 	private Date diaConsulta;
 	private Date horaConsulta;
 	private Pacientes paciente;
-	private boolean situacaoConsulta;
 	private DadosConsultas dadosConsulta;
 	private Medicos medico;
         private List<Exames> exames;
@@ -31,27 +32,27 @@ public class Consultas implements Serializable {
             public Consultas() {
                 
             }
-	    public Consultas(Pacientes paciente,Date diaConsulta,Date horaConsulta,Medicos medico) {
+	    public Consultas(Date diaConsulta,Date horaConsulta,Long codigoConsulta) {
                 this.diaConsulta = diaConsulta;
 	    	this.horaConsulta = horaConsulta;
-	    	this.paciente = paciente;
-                this.medico = medico;	    		  
+                this.codigoConsulta = codigoConsulta;
+                        
 	    }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.numeroConsulta);
-        hash = 79 * hash + Objects.hashCode(this.diaConsulta);
-        hash = 79 * hash + Objects.hashCode(this.horaConsulta);
-        hash = 79 * hash + Objects.hashCode(this.paciente);
-        hash = 79 * hash + (this.situacaoConsulta ? 1 : 0);
-        hash = 79 * hash + Objects.hashCode(this.dadosConsulta);
-        hash = 79 * hash + Objects.hashCode(this.medico);
-        hash = 79 * hash + Objects.hashCode(this.exames);
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.numeroConsulta);
+        hash = 43 * hash + Objects.hashCode(this.codigoConsulta);
+        hash = 43 * hash + (this.situacaoConsulta ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.diaConsulta);
+        hash = 43 * hash + Objects.hashCode(this.horaConsulta);
+        hash = 43 * hash + Objects.hashCode(this.paciente);
+        hash = 43 * hash + Objects.hashCode(this.dadosConsulta);
+        hash = 43 * hash + Objects.hashCode(this.medico);
+        hash = 43 * hash + Objects.hashCode(this.exames);
         return hash;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -69,6 +70,9 @@ public class Consultas implements Serializable {
             return false;
         }
         if (!Objects.equals(this.numeroConsulta, other.numeroConsulta)) {
+            return false;
+        }
+        if (!Objects.equals(this.codigoConsulta, other.codigoConsulta)) {
             return false;
         }
         if (!Objects.equals(this.diaConsulta, other.diaConsulta)) {
@@ -92,10 +96,7 @@ public class Consultas implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Consultas{" + "numeroConsulta=" + numeroConsulta + ", diaConsulta=" + diaConsulta + ", horaConsulta=" + horaConsulta + ", paciente=" + paciente + ", situacaoConsulta=" + situacaoConsulta + ", dadosConsulta=" + dadosConsulta + ", medico=" + medico + ", exames=" + exames + '}';
-    }   
+    
                 @Id
                 @GeneratedValue(strategy = GenerationType.IDENTITY)
                 public Long getNumeroConsulta() {
@@ -113,6 +114,14 @@ public class Consultas implements Serializable {
 		public void setDiaConsulta(Date diaConsulta) {
 			this.diaConsulta = diaConsulta;
 		}
+
+                public Long getCodigoConsulta() {
+                        return codigoConsulta;
+                }
+
+                public void setCodigoConsulta(Long codigoConsulta) {
+                        this.codigoConsulta = codigoConsulta;
+                }
                 
                 @Temporal(TemporalType.DATE)
 		public Date getHoraConsulta() {
@@ -128,12 +137,6 @@ public class Consultas implements Serializable {
 		public void setPaciente(Pacientes paciente) {
 			this.paciente = paciente;
 		}
-		public boolean getSituacaoConsulta() {
-			return situacaoConsulta;
-		}
-		public void setSituacaoConsulta(boolean situacaoConsulta) {
-			this.situacaoConsulta = situacaoConsulta;
-		}
                 @OneToOne(fetch = FetchType.EAGER,mappedBy = "consulta")              
 		public DadosConsultas getDadosConsulta() {
 			return dadosConsulta;
@@ -141,6 +144,13 @@ public class Consultas implements Serializable {
 		public void setDadosConsulta(DadosConsultas dadosConsulta) {
 			this.dadosConsulta = dadosConsulta;
 		}
+                public boolean isSituacaoConsulta() {
+                        return situacaoConsulta;
+                }
+
+                public void setSituacaoConsulta(boolean situacaoConsulta) {
+                        this.situacaoConsulta = situacaoConsulta;
+                }
                 @ManyToOne(fetch = FetchType.EAGER)
 		public Medicos getMedico() {
 			return medico;
@@ -156,5 +166,4 @@ public class Consultas implements Serializable {
                        this.exames = exames;
                 }
 	    
-
 }

@@ -7,5 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface InterfaceConsultasRepositorio extends CrudRepository<Consultas, Long> {
     
+    public Consultas findByCodigoConsulta(Long codigoConsulta);
+    
     
 }

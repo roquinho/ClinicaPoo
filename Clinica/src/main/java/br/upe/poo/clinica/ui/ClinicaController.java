@@ -1,9 +1,11 @@
 
 package br.upe.poo.clinica.ui;
 
+import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarConsultas;
 import br.upe.poo.clinica.regraNegocio.Fachada;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -84,7 +87,7 @@ public class ClinicaController {
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
-    @RequestMapping("/medico/buscaCpf")
+    @RequestMapping(value = "/medico/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
     public Medicos buscarMedicoCpf(Long cpf) { 
         Medicos medico = null;
         try {
@@ -94,7 +97,7 @@ public class ClinicaController {
         }
         return medico;
     }
-    @RequestMapping("/medico/buscaNome")
+    @RequestMapping(value = "/medico/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Medicos> buscarMedicoNome(String nome) {
         List<Medicos> medicos = null;
         try {
@@ -105,7 +108,7 @@ public class ClinicaController {
         return medicos;
     }
     
-    @RequestMapping("/medico/buscaEspecialidade")
+    @RequestMapping(value = "/medico/buscaEspecialidade",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Medicos> buscarMedicoEspecialidade(String especialidade) {
        List<Medicos> medicos = null;
         try {
@@ -149,7 +152,7 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     
-    @RequestMapping("/usuario/buscaCpf")
+    @RequestMapping(value = "/usuario/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario filtrarUsuarioCpf(Long cpf) { 
         Usuario usuario = null;
         try {
@@ -180,6 +183,49 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
         
     }
+    
+    @RequestMapping("/consulta/agendar")
+    public ResponseEntity<?> agendarConsulta(@RequestBody Consultas consulta, @RequestParam Long pacienteCpf, @RequestParam Long medicoCpf) {
+        try {System.out.println(consulta.getCodigoConsulta());
+            this.fachada.agendarConsulta(consulta,pacienteCpf,medicoCpf);
+            System.out.println(medicoCpf);
+        } catch (Exception ex) {
+            System.out.println("erro"+medicoCpf); 
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/consulta/filtrarCodigo",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta) {
+        Consultas consultas = null;
+        try {
+            consultas = this.fachada.filtrarConsultaCodigoConsulta(codigoConsulta);
+        } catch (ExceptionRegraNegocioFiltrarConsultas ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return consultas;
+    }
+    
+    @RequestMapping("/consulta/atualizar")
+    public ResponseEntity<?> atualizarConsulta(@RequestBody Consultas consulta) {
+        try {
+            this.fachada.atualizarConsulta(consulta);
+        } catch (Exception ex) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping("/consulta/deletar")
+    public ResponseEntity<?> deletarConsulta(@RequestParam Long codigoConsulta) {
+        try {
+            this.fachada.deletarConsultas(codigoConsulta);
+        } catch (Exception ex) {
+            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+           return new ResponseEntity<String>(HttpStatus.OK);
+        }
 
     public Fachada getFachada() {
         return fachada;

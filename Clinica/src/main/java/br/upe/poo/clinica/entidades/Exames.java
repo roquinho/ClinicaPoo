@@ -23,6 +23,7 @@ public class Exames implements Serializable {
 	private Pacientes paciente;
 	private ResultadosExames resultadoExame;
 	private Consultas consulta; 
+        
 	 public Exames() {
 		 
 	 }
