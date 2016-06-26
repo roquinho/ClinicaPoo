@@ -2,12 +2,17 @@
 package br.upe.poo.clinica.ui;
 
 import br.upe.poo.clinica.entidades.Consultas;
+import br.upe.poo.clinica.entidades.DadosConsultas;
 import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.Usuario;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioAgendarExame;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioAtualizarExames;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasAtualizar;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasDeletar;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasFiltrar;
+import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasGerar;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDeletarExames;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarConsultas;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarExame;
@@ -286,6 +291,49 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
         }
         
+    @RequestMapping("/dadosConsulta/gerar")
+    public ResponseEntity<?> gerarDadosConsulta(@RequestBody DadosConsultas dadosConsulta, @RequestParam Long codigoConsulta) {
+        try {
+            this.fachada.gerarDadosConsulta(dadosConsulta, codigoConsulta);
+        } catch (Exception ex) {
+          return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+        }
+    
+    @RequestMapping(value = "/dadosConsulta/filtrar",produces = MediaType.APPLICATION_JSON_VALUE)
+    public DadosConsultas filtrarDadosConsulta(@RequestParam Long idDadosConsulta) {
+        DadosConsultas dadosConsulta = null;    
+        try {
+            dadosConsulta = this.fachada.filtrarDadosConsulta(idDadosConsulta);
+        } catch (ExceptionRegraNegocioDadosConsultasFiltrar ex) {
+            Logger.getLogger(ClinicaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dadosConsulta;
+    }
+    
+    @RequestMapping("/dadosConsulta/atualizar")
+    public ResponseEntity<?> atualizarDadosConsulta(@RequestBody DadosConsultas dadosConsulta) {
+        try {
+            this.fachada.atualizarDadosConsulta(dadosConsulta);
+        } catch (Exception ex) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK); 
+        }
+    
+     @RequestMapping("/dadosConsulta/deletar")
+     public ResponseEntity<?> deletarDadosConsulta(@RequestParam Long idDadosConsulta) {
+        try {
+            this.fachada.deletarDadosConsulta(idDadosConsulta);
+        } catch (Exception ex) {
+           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK); 
+        }
+     
+            
+            
     public Fachada getFachada() {
         return fachada;
     }

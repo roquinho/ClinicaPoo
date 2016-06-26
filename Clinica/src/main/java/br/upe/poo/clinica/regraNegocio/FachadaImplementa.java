@@ -2,6 +2,7 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Consultas;
+import br.upe.poo.clinica.entidades.DadosConsultas;
 import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
@@ -22,6 +23,8 @@ public class FachadaImplementa implements Fachada {
     private InterfaceRegraNegocioConsultas consultas;
     @Autowired
     private InterfaceRegraNegocioExames exames;
+    @Autowired
+    private InterfaceRegraNegocioDadosConsulta dadosConsulta;
       
         public FachadaImplementa() {
             
@@ -144,6 +147,26 @@ public class FachadaImplementa implements Fachada {
     @Override
     public List<Exames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
         return this.exames.filtrarTipoExame(tipoExame);
+    }
+
+    @Override
+    public void gerarDadosConsulta(DadosConsultas dadosConsulta, Long codigoConsulta) throws ExceptionRegraNegocioDadosConsultasGerar {
+        this.dadosConsulta.gerarDadosConsulta(dadosConsulta, codigoConsulta);
+    }
+
+    @Override
+    public DadosConsultas filtrarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasFiltrar {
+        return this.dadosConsulta.filtrarDadosConsulta(idDadosConsulta);
+    }
+
+    @Override
+    public void atualizarDadosConsulta(DadosConsultas dadosConsultas) throws ExceptionRegraNegocioDadosConsultasAtualizar {
+        this.dadosConsulta.atualizarDadosConsulta(dadosConsultas);
+    }
+
+    @Override
+    public void deletarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasDeletar {
+        this.dadosConsulta.deletarDadosConsulta(idDadosConsulta);
     }
     
 }

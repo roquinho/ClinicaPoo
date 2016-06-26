@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -18,14 +16,14 @@ public class DadosConsultas implements Serializable {
   private Date fimConsulta;
   private Consultas consulta;
   private Long idDadosConsulta;
-  private String Observacoes;
+  private String observacoes;
   
     public DadosConsultas() {
         
     }
     
-    public DadosConsultas(Consultas consultas,Date inicioConsulta,Date fimConsulta) {
-        this.consulta = consultas;
+    public DadosConsultas(Date inicioConsulta,Date fimConsulta,String observacoes) {
+        this.observacoes = observacoes; 
         this.inicioConsulta = inicioConsulta;
         this.fimConsulta = fimConsulta;
     }
@@ -37,7 +35,7 @@ public class DadosConsultas implements Serializable {
         hash = 53 * hash + Objects.hashCode(this.fimConsulta);
         hash = 53 * hash + Objects.hashCode(this.consulta);
         hash = 53 * hash + Objects.hashCode(this.idDadosConsulta);
-        hash = 53 * hash + Objects.hashCode(this.Observacoes);
+        hash = 53 * hash + Objects.hashCode(this.observacoes);
         return hash;
     }
 
@@ -53,7 +51,7 @@ public class DadosConsultas implements Serializable {
             return false;
         }
         final DadosConsultas other = (DadosConsultas) obj;
-        if (!Objects.equals(this.Observacoes, other.Observacoes)) {
+        if (!Objects.equals(this.observacoes, other.observacoes)) {
             return false;
         }
         if (!Objects.equals(this.inicioConsulta, other.inicioConsulta)) {
@@ -73,11 +71,10 @@ public class DadosConsultas implements Serializable {
 
     @Override
     public String toString() {
-        return "DadosConsultas{" + "inicioConsulta=" + inicioConsulta + ", fimConsulta=" + fimConsulta + ", consulta=" + consulta + ", idDadosConsulta=" + idDadosConsulta + ", Observacoes=" + Observacoes + '}';
+        return "DadosConsultas{" + "inicioConsulta=" + inicioConsulta + ", fimConsulta=" + fimConsulta + ", consulta=" + consulta + ", idDadosConsulta=" + idDadosConsulta + ", observacoes=" + observacoes + '}';
     }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getIdDadosConsulta() {
         return idDadosConsulta;
     }
@@ -110,11 +107,11 @@ public class DadosConsultas implements Serializable {
   }
 
   public String getObservacoes() {
-        return Observacoes;
+        return observacoes;
     }
 
-  public void setObservacoes(String Observacoes) {
-        this.Observacoes = Observacoes;
+  public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
   
 }
