@@ -3,6 +3,7 @@ package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.DadosConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarDadosConsultas;
 import br.upe.poo.clinica.persistencia.InterfaceConsultasRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceDadosConsultasRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class RegraNegocioDadosConsulta implements InterfaceRegraNegocioDadosCons
     }
 
     @Override
-    public DadosConsultas filtrarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasFiltrar {
+    public ListarDadosConsultas filtrarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasFiltrar {
         DadosConsultas dadosConsultas = null;
          if(idDadosConsulta == null) {
              throw new ExceptionRegraNegocioDadosConsultasFiltrar();
@@ -63,7 +64,7 @@ public class RegraNegocioDadosConsulta implements InterfaceRegraNegocioDadosCons
          else {
              dadosConsultas = ird.findByIdDadosConsulta(idDadosConsulta);
          }
-         return dadosConsultas;
+         return new ListarDadosConsultas(dadosConsultas);
     }
 
     @Override

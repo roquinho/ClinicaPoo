@@ -8,7 +8,12 @@ import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.listarEntidades.ListarConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarDadosConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarExames;
+import br.upe.poo.clinica.listarEntidades.ListarMedicos;
 import br.upe.poo.clinica.listarEntidades.ListarPacientes;
+import br.upe.poo.clinica.listarEntidades.ListarResultadosExames;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,7 +33,7 @@ public interface Fachada extends Serializable {
     
     public void cadastrarMedicos(Medicos medico)throws ExceptionRegraNegocioCadastrarMedicos;
     
-    public Medicos buscarMedicoCpf(Long cpf)throws ExceptionRegraNegocioBuscarMedicos;
+    public ListarMedicos buscarMedicoCpf(Long cpf)throws ExceptionRegraNegocioBuscarMedicos;
     
     public List<Medicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
     
@@ -52,7 +57,7 @@ public interface Fachada extends Serializable {
 
     public void agendarConsulta(Consultas consulta,Long pacienteCpf,Long medicoCpf)throws ExceptionRegraNegocioAgendarConsultas;
     
-    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta)throws ExceptionRegraNegocioFiltrarConsultas;
+    public ListarConsultas filtrarConsultaCodigoConsulta(Long codigoConsulta)throws ExceptionRegraNegocioFiltrarConsultas;
     
     public void atualizarConsulta(Consultas consulta)throws ExceptionRegraNegocioAtualizarConsultas;
     
@@ -63,7 +68,7 @@ public interface Fachada extends Serializable {
     
     public void agendarExame(Exames exame,Long pacienteCpf,Long codigoConsulta)throws ExceptionRegraNegocioAgendarExame;
     
-    public Exames filtrarExameCodigo(Long codigoExame)throws ExceptionRegraNegocioFiltrarExame;
+    public ListarExames filtrarExameCodigo(Long codigoExame)throws ExceptionRegraNegocioFiltrarExame;
     
     public List<Exames> filtrarTipoExame(String tipoExame)throws ExceptionRegraNegocioFiltrarExame;
     
@@ -76,7 +81,7 @@ public interface Fachada extends Serializable {
     
     public void gerarDadosConsulta(DadosConsultas dadosConsulta,Long codigoConsulta)throws ExceptionRegraNegocioDadosConsultasGerar;
     
-    public DadosConsultas filtrarDadosConsulta(Long idDadosConsulta)throws ExceptionRegraNegocioDadosConsultasFiltrar;
+    public ListarDadosConsultas filtrarDadosConsulta(Long idDadosConsulta)throws ExceptionRegraNegocioDadosConsultasFiltrar;
     
     public void atualizarDadosConsulta(DadosConsultas dadosConsultas)throws ExceptionRegraNegocioDadosConsultasAtualizar;
     
@@ -86,7 +91,7 @@ public interface Fachada extends Serializable {
     
     public void gerarResultadoExames(ResultadosExames resultadoExames,Long codigoExame)throws ExceptionRegraNegocioResultadosExamesGerar;
     
-    public ResultadosExames filtrarResultadoExame(Long idResultadoExames)throws ExceptionRegraNegocioResultadosExamesFiltrar;
+    public ListarResultadosExames filtrarResultadoExame(Long idResultadoExames)throws ExceptionRegraNegocioResultadosExamesFiltrar;
     
     public void atualizarResultadoExame(ResultadosExames resultadosExames)throws ExceptionRegraNegocioResultadosExamesAtualizar;
     

@@ -8,7 +8,12 @@ import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.listarEntidades.ListarConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarDadosConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarExames;
+import br.upe.poo.clinica.listarEntidades.ListarMedicos;
 import br.upe.poo.clinica.listarEntidades.ListarPacientes;
+import br.upe.poo.clinica.listarEntidades.ListarResultadosExames;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasFiltrar;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarConsultas;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarExame;
@@ -95,8 +100,8 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     @RequestMapping(value = "/medico/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Medicos buscarMedicoCpf(Long cpf) { 
-        Medicos medico = null;
+    public ListarMedicos buscarMedicoCpf(Long cpf) { 
+        ListarMedicos medico = null;
         try {
             medico = this.fachada.buscarMedicoCpf(cpf);
         } catch (Exception ex) {
@@ -205,8 +210,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/consulta/filtrarCodigo",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta) {
-        Consultas consultas = null;
+    public ListarConsultas filtrarConsultaCodigoConsulta(Long codigoConsulta) {
+        ListarConsultas consultas = null;
         try {
             consultas = this.fachada.filtrarConsultaCodigoConsulta(codigoConsulta);
         } catch (ExceptionRegraNegocioFiltrarConsultas ex) {
@@ -247,8 +252,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/exame/filtrarCodigo",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Exames filtrarExameCodigo(@RequestParam Long codigoExame) {
-       Exames exame = null;
+    public ListarExames filtrarExameCodigo(@RequestParam Long codigoExame) {
+       ListarExames exame = null;
         try {
             exame = this.fachada.filtrarExameCodigo(codigoExame);
         } catch (ExceptionRegraNegocioFiltrarExame ex) {
@@ -299,8 +304,8 @@ public class ClinicaController {
         }
     
     @RequestMapping(value = "/dadosConsulta/filtrar",produces = MediaType.APPLICATION_JSON_VALUE)
-    public DadosConsultas filtrarDadosConsulta(@RequestParam Long idDadosConsulta) {
-        DadosConsultas dadosConsulta = null;    
+    public ListarDadosConsultas filtrarDadosConsulta(@RequestParam Long idDadosConsulta) {
+        ListarDadosConsultas dadosConsulta = null;    
         try {
             dadosConsulta = this.fachada.filtrarDadosConsulta(idDadosConsulta);
         } catch (ExceptionRegraNegocioDadosConsultasFiltrar ex) {
@@ -341,8 +346,8 @@ public class ClinicaController {
     }
             
     @RequestMapping(value = "/resultadoExames/filtrar",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResultadosExames filtrarResultadoExame(@RequestParam Long idResultadoExame) {
-        ResultadosExames resultadosExames = null;
+    public ListarResultadosExames filtrarResultadoExame(@RequestParam Long idResultadoExame) {
+        ListarResultadosExames resultadosExames = null;
         try {
             resultadosExames = this.fachada.filtrarResultadoExame(idResultadoExame);
         } catch (ExceptionRegraNegocioResultadosExamesFiltrar ex) {

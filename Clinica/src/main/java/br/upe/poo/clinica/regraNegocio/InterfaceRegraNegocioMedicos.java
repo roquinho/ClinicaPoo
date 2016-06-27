@@ -2,6 +2,7 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Medicos;
+import br.upe.poo.clinica.listarEntidades.ListarMedicos;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface InterfaceRegraNegocioMedicos extends Serializable {
     
     public void cadastrarMedicos(Medicos medico)throws ExceptionRegraNegocioCadastrarMedicos;
     
-    public Medicos buscarMedicoCpf(Long cpf)throws ExceptionRegraNegocioBuscarMedicos;
+    public ListarMedicos buscarMedicoCpf(Long cpf)throws ExceptionRegraNegocioBuscarMedicos;
     
     public List<Medicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
     

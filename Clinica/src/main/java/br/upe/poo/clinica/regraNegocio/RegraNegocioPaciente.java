@@ -4,6 +4,7 @@ package br.upe.poo.clinica.regraNegocio;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.listarEntidades.ListarPacientes;
 import br.upe.poo.clinica.persistencia.InterfaceRepositorioPacientes;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,14 +57,18 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
 
     @Override
     public List<Pacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
-          List<Pacientes> listaPacientes = null;
+        List<Pacientes> pacientes = null;
+        //List<ListarPacientes> listarPacientes = new ArrayList<>();
+        
         if(nome == null) {
           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
         }
         else {
-            listaPacientes = irp.findByNome(nome);
+            pacientes = irp.findByNome(nome);
+                     
+             
         }        
-        return listaPacientes;
+        return  pacientes;
     }
 
     @Override

@@ -158,7 +158,7 @@ public class Consultas implements Serializable {
 		public void setMedico(Medicos medico) {
 			this.medico = medico;
 		}
-                @OneToMany(fetch = FetchType.EAGER)
+                @OneToMany(fetch = FetchType.EAGER,mappedBy = "consulta")
                 public List<Exames> getExames() {
                        return exames;
                 }

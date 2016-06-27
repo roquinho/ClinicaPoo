@@ -4,6 +4,7 @@ package br.upe.poo.clinica.regraNegocio;
 import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.listarEntidades.ListarExames;
 import br.upe.poo.clinica.persistencia.InterfaceConsultasRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceExamesRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceRepositorioPacientes;
@@ -66,7 +67,7 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
         }
 
     @Override
-    public Exames filtrarExameCodigo(Long codigoExame) throws ExceptionRegraNegocioFiltrarExame {
+    public ListarExames filtrarExameCodigo(Long codigoExame) throws ExceptionRegraNegocioFiltrarExame {
         Exames exame = null;
         
         if(codigoExame == null) {
@@ -75,7 +76,7 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
         else {
             exame = ire.findByCodigoExame(codigoExame);
         }
-        return exame;
+        return new ListarExames(exame);
     }
     
     @Override

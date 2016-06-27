@@ -8,7 +8,12 @@ import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.listarEntidades.ListarConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarDadosConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarExames;
+import br.upe.poo.clinica.listarEntidades.ListarMedicos;
 import br.upe.poo.clinica.listarEntidades.ListarPacientes;
+import br.upe.poo.clinica.listarEntidades.ListarResultadosExames;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,7 +69,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Medicos buscarMedicoCpf(Long cpf) throws ExceptionRegraNegocioBuscarMedicos {
+    public ListarMedicos buscarMedicoCpf(Long cpf) throws ExceptionRegraNegocioBuscarMedicos {
         return this.medicos.buscarMedicoCpf(cpf);
     }
 
@@ -114,7 +119,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
+    public ListarConsultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
         return this.consultas.filtrarConsultaCodigoConsulta(codigoConsulta);
     }
 
@@ -134,7 +139,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Exames filtrarExameCodigo(Long codigoExame) throws ExceptionRegraNegocioFiltrarExame {
+    public ListarExames filtrarExameCodigo(Long codigoExame) throws ExceptionRegraNegocioFiltrarExame {
         return this.exames.filtrarExameCodigo(codigoExame);
     }
 
@@ -159,7 +164,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public DadosConsultas filtrarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasFiltrar {
+    public ListarDadosConsultas filtrarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasFiltrar {
         return this.dadosConsulta.filtrarDadosConsulta(idDadosConsulta);
     }
 
@@ -179,7 +184,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public ResultadosExames filtrarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesFiltrar {
+    public ListarResultadosExames filtrarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesFiltrar {
         return this.resultadoExames.filtrarResultadoExame(idResultadoExames);
     }
 

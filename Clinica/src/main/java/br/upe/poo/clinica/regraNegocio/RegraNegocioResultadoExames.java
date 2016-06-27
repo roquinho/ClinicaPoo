@@ -3,6 +3,7 @@ package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Exames;
 import br.upe.poo.clinica.entidades.ResultadosExames;
+import br.upe.poo.clinica.listarEntidades.ListarResultadosExames;
 import br.upe.poo.clinica.persistencia.InterfaceExamesRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceResultadosExamesRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class RegraNegocioResultadoExames implements InterfaceRegraNegocioResulta
     }
 
     @Override
-    public ResultadosExames filtrarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesFiltrar {
+    public ListarResultadosExames filtrarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesFiltrar {
         ResultadosExames resultadosExames = null;
          if(idResultadoExames == null) {
              throw new ExceptionRegraNegocioResultadosExamesFiltrar();
@@ -57,7 +58,7 @@ public class RegraNegocioResultadoExames implements InterfaceRegraNegocioResulta
          else {
              resultadosExames = irr.findByIdResultadoExames(idResultadoExames);
          }
-         return resultadosExames;
+         return new ListarResultadosExames(resultadosExames);
     }
 
     @Override

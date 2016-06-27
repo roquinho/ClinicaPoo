@@ -4,6 +4,7 @@ package br.upe.poo.clinica.regraNegocio;
 import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.listarEntidades.ListarConsultas;
 import br.upe.poo.clinica.persistencia.InterfaceConsultasRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceMedicosRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceRepositorioPacientes;
@@ -64,7 +65,7 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     }
 
     @Override
-    public Consultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
+    public ListarConsultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
         Consultas consultas = null;
         
         if(codigoConsulta == null) {
@@ -73,7 +74,7 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
         else {
             consultas = irc.findByCodigoConsulta(codigoConsulta);
         }       
-        return consultas;
+        return new ListarConsultas(consultas);
     }
 
     @Override

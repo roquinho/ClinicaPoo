@@ -2,6 +2,7 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.DadosConsultas;
+import br.upe.poo.clinica.listarEntidades.ListarDadosConsultas;
 import java.io.Serializable;
 
 /**
@@ -12,7 +13,7 @@ public interface InterfaceRegraNegocioDadosConsulta extends Serializable {
     
     public void gerarDadosConsulta(DadosConsultas dadosConsulta,Long codigoConsulta)throws ExceptionRegraNegocioDadosConsultasGerar;
     
-    public DadosConsultas filtrarDadosConsulta(Long idDadosConsulta)throws ExceptionRegraNegocioDadosConsultasFiltrar;
+    public ListarDadosConsultas filtrarDadosConsulta(Long idDadosConsulta)throws ExceptionRegraNegocioDadosConsultasFiltrar;
     
     public void atualizarDadosConsulta(DadosConsultas dadosConsultas)throws ExceptionRegraNegocioDadosConsultasAtualizar;
     
