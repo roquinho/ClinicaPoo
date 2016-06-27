@@ -8,6 +8,7 @@ import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.listarEntidades.ListarPacientes;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface Fachada extends Serializable {
     
     public void cadastrarPaciente(Pacientes paciente)throws ExceptionRegraNegocioPacientesCadastrar;
     
-    public Pacientes buscarPacienteCpf(Long cpf)throws ExceptionRegraNegocioPacienteBuscarPaciente;
+    public ListarPacientes buscarPacienteCpf(Long cpf)throws ExceptionRegraNegocioPacienteBuscarPaciente;
     
     public List<Pacientes> buscarPacienteNome(String nome)throws ExceptionRegraNegocioPacienteBuscarPaciente;
     

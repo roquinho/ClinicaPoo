@@ -8,6 +8,7 @@ import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.listarEntidades.ListarPacientes;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public Pacientes buscarPacienteCpf(Long cpf) throws ExceptionRegraNegocioPacienteBuscarPaciente {
+    public ListarPacientes buscarPacienteCpf(Long cpf) throws ExceptionRegraNegocioPacienteBuscarPaciente {
         return this.pacientes.buscarPacienteCpf(cpf);
     }
 

@@ -2,6 +2,7 @@
 package br.upe.poo.clinica.regraNegocio;
 
 import br.upe.poo.clinica.entidades.Pacientes;
+import br.upe.poo.clinica.listarEntidades.ListarPacientes;
 import br.upe.poo.clinica.persistencia.InterfaceRepositorioPacientes;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     }
 
     @Override
-    public Pacientes buscarPacienteCpf(Long cpf) throws ExceptionRegraNegocioPacienteBuscarPaciente {
+    public ListarPacientes buscarPacienteCpf(Long cpf) throws ExceptionRegraNegocioPacienteBuscarPaciente {
         Pacientes paciente = null;
         
        if(cpf == null){
@@ -50,7 +51,7 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
        else {
            paciente = irp.findByCpf(cpf);
        }
-        return paciente;
+        return new ListarPacientes(paciente);
     }
 
     @Override

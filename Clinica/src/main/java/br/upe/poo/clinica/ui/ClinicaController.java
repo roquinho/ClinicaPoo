@@ -8,13 +8,11 @@ import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.entidades.Pacientes;
 import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.entidades.Usuario;
+import br.upe.poo.clinica.listarEntidades.ListarPacientes;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioDadosConsultasFiltrar;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarConsultas;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioFiltrarExame;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesAtualizar;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesDeletar;
 import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesFiltrar;
-import br.upe.poo.clinica.regraNegocio.ExceptionRegraNegocioResultadosExamesGerar;
 import br.upe.poo.clinica.regraNegocio.Fachada;
 import java.util.List;
 import java.util.logging.Level;
@@ -46,8 +44,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/paciente/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Pacientes buscarPacienteCpf(Long cpf) {
-         Pacientes paciente = null;
+    public ListarPacientes buscarPacienteCpf(Long cpf) {
+         ListarPacientes paciente = null;
         try {
             paciente = this.fachada.buscarPacienteCpf(cpf);
         } catch (Exception ex) {
