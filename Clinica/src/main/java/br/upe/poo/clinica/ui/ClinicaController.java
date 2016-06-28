@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/Clinica")
 public class ClinicaController {
@@ -292,7 +293,8 @@ public class ClinicaController {
         }
         return new ResponseEntity<String>(HttpStatus.OK);
         }
-        
+      /*-------------------------DADOS CONSULTAS--------------------*/
+    
     @RequestMapping("/dadosConsulta/gerar")
     public ResponseEntity<?> gerarDadosConsulta(@RequestBody DadosConsultas dadosConsulta, @RequestParam Long codigoConsulta) {
         try {
@@ -333,7 +335,8 @@ public class ClinicaController {
         }
         return new ResponseEntity<String>(HttpStatus.OK); 
         }
-     
+    /*------------------------RESULTADOS DE EXAMES--------------------------*/
+    
     @RequestMapping("/resultadoExames/gerar")
     public ResponseEntity<?> gerarResultadoExame(@RequestBody ResultadosExames resultadosExames, @RequestParam Long codigoExame) {
         try {
@@ -376,6 +379,7 @@ public class ClinicaController {
         return new ResponseEntity<String>(HttpStatus.OK); 
         
     }
+    
     
     public Fachada getFachada() {
         return fachada;
