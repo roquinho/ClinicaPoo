@@ -59,8 +59,8 @@ public class ClinicaController {
        return paciente;
     }
     @RequestMapping(value = "/paciente/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Pacientes> buscarPacienteNome(String nome) {
-        List<Pacientes> listaPaciente = null;
+    public List<ListarPacientes> buscarPacienteNome(String nome) {
+        List<ListarPacientes> listaPaciente = null;
         try {
      listaPaciente =  this.fachada.buscarPacienteNome(nome);
         } catch (Exception e) {
@@ -110,8 +110,8 @@ public class ClinicaController {
         return medico;
     }
     @RequestMapping(value = "/medico/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> buscarMedicoNome(String nome) {
-        List<Medicos> medicos = null;
+    public List<ListarMedicos> buscarMedicoNome(String nome) {
+        List<ListarMedicos> medicos = null;
         try {
             medicos = this.fachada.buscarMedicoNome(nome);
         } catch (Exception ex) {
@@ -121,8 +121,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/medico/buscaEspecialidade",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> buscarMedicoEspecialidade(String especialidade) {
-       List<Medicos> medicos = null;
+    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade) {
+       List<ListarMedicos> medicos = null;
         try {
            medicos =  this.fachada.buscarMedicoEspecialidade(especialidade);
         } catch (Exception ex) {
@@ -263,8 +263,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/exame/filtrarTipoExame",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Exames> filtrarExameTipoExame(@RequestParam String tipoExame) {
-        List<Exames> exames = null;
+    public List<ListarExames> filtrarExameTipoExame(@RequestParam String tipoExame) {
+        List<ListarExames> exames = null;
         try {
             exames = this.fachada.filtrarTipoExame(tipoExame);
         } catch (ExceptionRegraNegocioFiltrarExame ex) {

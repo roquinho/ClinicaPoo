@@ -4,6 +4,7 @@ package br.upe.poo.clinica.regraNegocio;
 import br.upe.poo.clinica.entidades.Medicos;
 import br.upe.poo.clinica.listarEntidades.ListarMedicos;
 import br.upe.poo.clinica.persistencia.InterfaceMedicosRepositorio;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,27 +60,37 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
     }
 
     @Override
-    public List<Medicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
+    public List<ListarMedicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
         List<Medicos> medicos = null;
+        List<ListarMedicos> listarMedicos = new ArrayList<>();
          if(nome==null) {
              throw new ExceptionRegraNegocioBuscarMedicos();
          }
          else {
           medicos = irm.findByNome(nome);
+            for(int i = 0; i< medicos.size(); i++) {
+                ListarMedicos listaMedicos = new ListarMedicos(medicos.get(i));
+                  listarMedicos.add(listaMedicos);
+            }
     }
-         return medicos;
+         return listarMedicos;
     }
     
     @Override
-    public List<Medicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
+    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
       List<Medicos> medicos = null;
+      List<ListarMedicos> listarMedicos = new ArrayList<>();
          if(especialidade==null) {
              throw new ExceptionRegraNegocioBuscarMedicos();
          }
          else {
           medicos = irm.findByEspecialidade(especialidade);
+            for(int i = 0; i<medicos.size();i++) {
+                ListarMedicos listaMedicos = new ListarMedicos(medicos.get(i));
+                  listarMedicos.add(listaMedicos);
+            }
     }
-         return medicos;
+         return listarMedicos;
     }
 
     @Override

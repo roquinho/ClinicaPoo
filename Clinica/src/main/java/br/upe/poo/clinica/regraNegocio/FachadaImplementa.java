@@ -49,7 +49,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Pacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
+    public List<ListarPacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
        return this.pacientes.buscarPacienteNome(nome);
     }
 
@@ -74,12 +74,12 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Medicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
+    public List<ListarMedicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
         return this.medicos.buscarMedicoNome(nome);
     }
     
     @Override
-    public List<Medicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
+    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
         return this.medicos.buscarMedicoEspecialidade(especialidade);
     }
 
@@ -154,7 +154,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Exames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
+    public List<ListarExames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
         return this.exames.filtrarTipoExame(tipoExame);
     }
 
