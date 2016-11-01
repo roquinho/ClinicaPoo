@@ -6,6 +6,7 @@ import br.upe.poo.clinica.entidades.ResultadosExames;
 import br.upe.poo.clinica.listarEntidades.ListarResultadosExames;
 import br.upe.poo.clinica.persistencia.InterfaceExamesRepositorio;
 import br.upe.poo.clinica.persistencia.InterfaceResultadosExamesRepositorio;
+import javax.faces.lifecycle.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

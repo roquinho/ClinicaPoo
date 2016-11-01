@@ -25,7 +25,11 @@ public class ListarExames implements Serializable {
                  this.tipoExame = exame.getTipoExame();
                  this.consulta = exame.getConsulta().getCodigoConsulta();
                  this.paciente = exame.getPaciente().getCpf();
-                 this.resultadoExame = exame.getResultadoExame().getIdResultadoExames();
+                 
+                    if(exame.getResultadoExame()!=null) {
+                        ListarResultadosExames listarResultadosExame = new ListarResultadosExames(exame.getResultadoExame());
+                        this.resultadoExame = listarResultadosExame.getIdResultadoExames();
+                    }
 	 }
          
 	 public ListarExames(String tipoExame,Date dataExame,Date horaExame,Long codigoExame) {

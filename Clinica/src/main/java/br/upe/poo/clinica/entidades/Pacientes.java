@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -155,14 +156,14 @@ public class Pacientes implements Serializable {
 		this.senha = senha;
 	}
 
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="paciente",cascade = CascadeType.REMOVE)
 	public List<Exames> getExames() {
 		return exames;
 	}

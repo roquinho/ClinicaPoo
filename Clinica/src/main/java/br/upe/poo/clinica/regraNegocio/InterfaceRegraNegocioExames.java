@@ -16,7 +16,7 @@ public interface InterfaceRegraNegocioExames extends Serializable {
     
     public ListarExames filtrarExameCodigo(Long codigoExame)throws ExceptionRegraNegocioFiltrarExame;
     
-    public List<ListarExames> filtrarTipoExame(String tipoExame)throws ExceptionRegraNegocioFiltrarExame;
+    public List<Exames> filtrarTipoExame(String tipoExame)throws ExceptionRegraNegocioFiltrarExame;
     
     public void atualizarExame(Exames exame)throws ExceptionRegraNegocioAtualizarExames;
     

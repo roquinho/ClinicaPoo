@@ -81,21 +81,18 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
     }
     
     @Override
-    public List<ListarExames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
+    public List<Exames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
         List<Exames> exames = null;
-        List<ListarExames> listarExames = new ArrayList<>();
+        //List<ListarExames> listarExames = new ArrayList<>();
         
         if(tipoExame == null) {
             throw new ExceptionRegraNegocioFiltrarExame();
         }
         else {
             exames = ire.findByTipoExame(tipoExame);
-              for(int i = 0; i<exames.size(); i++) {
-                  ListarExames listaExames = new ListarExames(exames.get(i));
-                    listarExames.add(listaExames);
-              }
+         
         }
-        return listarExames;
+        return exames;
     }
 
     @Override

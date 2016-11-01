@@ -3,6 +3,7 @@ package br.upe.poo.clinica.entidades;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -147,7 +148,7 @@ public class Medicos implements Serializable {
                 this.especialidade = especialidade;
         }
                
-        @OneToMany(fetch = FetchType.EAGER,mappedBy="medico")
+        @OneToMany(fetch = FetchType.EAGER,mappedBy="medico",cascade = CascadeType.REMOVE)
 	public List<Consultas> getConsultas() {
 		return consultas;
 	}

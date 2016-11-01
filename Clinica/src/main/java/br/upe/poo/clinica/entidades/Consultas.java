@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -158,7 +159,7 @@ public class Consultas implements Serializable {
 		public void setMedico(Medicos medico) {
 			this.medico = medico;
 		}
-                @OneToMany(fetch = FetchType.EAGER,mappedBy = "consulta")
+                @OneToMany(fetch = FetchType.EAGER,mappedBy = "consulta",cascade = CascadeType.REMOVE)
                 public List<Exames> getExames() {
                        return exames;
                 }

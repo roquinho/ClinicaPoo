@@ -29,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -50,7 +51,7 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/paciente/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ListarPacientes buscarPacienteCpf(Long cpf) {
+    public ListarPacientes buscarPacienteCpf(@RequestParam Long cpf) {
          ListarPacientes paciente = null;
         try {
             paciente = this.fachada.buscarPacienteCpf(cpf);
@@ -60,8 +61,8 @@ public class ClinicaController {
        return paciente;
     }
     @RequestMapping(value = "/paciente/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ListarPacientes> buscarPacienteNome(String nome) {
-        List<ListarPacientes> listaPaciente = null;
+    public List<Pacientes> buscarPacienteNome(@RequestParam String nome) {
+        List<Pacientes> listaPaciente = null;
         try {
      listaPaciente =  this.fachada.buscarPacienteNome(nome);
         } catch (Exception e) {
@@ -96,12 +97,12 @@ public class ClinicaController {
         try {
             this.fachada.cadastrarMedicos(medico);
         } catch (Exception e) {
-            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     @RequestMapping(value = "/medico/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ListarMedicos buscarMedicoCpf(Long cpf) { 
+    public ListarMedicos buscarMedicoCpf(@RequestParam Long cpf) { 
         ListarMedicos medico = null;
         try {
             medico = this.fachada.buscarMedicoCpf(cpf);
@@ -111,8 +112,8 @@ public class ClinicaController {
         return medico;
     }
     @RequestMapping(value = "/medico/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ListarMedicos> buscarMedicoNome(String nome) {
-        List<ListarMedicos> medicos = null;
+    public List<Medicos> buscarMedicoNome(@RequestParam String nome) {
+        List<Medicos> medicos = null;
         try {
             medicos = this.fachada.buscarMedicoNome(nome);
         } catch (Exception ex) {
@@ -122,8 +123,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/medico/buscaEspecialidade",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade) {
-       List<ListarMedicos> medicos = null;
+    public List<Medicos> buscarMedicoEspecialidade(@RequestParam String especialidade) {
+       List<Medicos> medicos = null;
         try {
            medicos =  this.fachada.buscarMedicoEspecialidade(especialidade);
         } catch (Exception ex) {
@@ -166,7 +167,7 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/usuario/buscaCpf",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Usuario filtrarUsuarioCpf(Long cpf) { 
+    public Usuario filtrarUsuarioCpf(@RequestParam Long cpf) { 
         Usuario usuario = null;
         try {
             usuario = this.fachada.filtrarUsuarioCpf(cpf);
@@ -205,13 +206,13 @@ public class ClinicaController {
             System.out.println(medicoCpf);
         } catch (Exception ex) {
             System.out.println("erro"+medicoCpf); 
-            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Exception>(ex,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
     
     @RequestMapping(value = "/consulta/filtrarCodigo",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ListarConsultas filtrarConsultaCodigoConsulta(Long codigoConsulta) {
+    public ListarConsultas filtrarConsultaCodigoConsulta(@RequestParam Long codigoConsulta) {
         ListarConsultas consultas = null;
         try {
             consultas = this.fachada.filtrarConsultaCodigoConsulta(codigoConsulta);
@@ -264,8 +265,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/exame/filtrarTipoExame",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ListarExames> filtrarExameTipoExame(@RequestParam String tipoExame) {
-        List<ListarExames> exames = null;
+    public List<Exames> filtrarExameTipoExame(@RequestParam String tipoExame) {
+        List<Exames> exames = null;
         try {
             exames = this.fachada.filtrarTipoExame(tipoExame);
         } catch (ExceptionRegraNegocioFiltrarExame ex) {
@@ -298,7 +299,7 @@ public class ClinicaController {
     @RequestMapping("/dadosConsulta/gerar")
     public ResponseEntity<?> gerarDadosConsulta(@RequestBody DadosConsultas dadosConsulta, @RequestParam Long codigoConsulta) {
         try {
-            this.fachada.gerarDadosConsulta(dadosConsulta, codigoConsulta);
+            this.fachada.gerarDadosConsulta(dadosConsulta, codigoConsulta);System.out.println("br.upe.poo.clinica.ui.ClinicaController.gerarDadosConsulta()");
         } catch (Exception ex) {
           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
         }

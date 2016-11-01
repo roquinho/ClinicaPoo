@@ -26,16 +26,19 @@ public class ListarConsultas implements Serializable {
                 this.horaConsulta = consulta.getHoraConsulta();
                 this.numeroConsulta = consulta.getNumeroConsulta();
                 this.situacaoConsulta = consulta.isSituacaoConsulta();
-                this.dadosConsulta = consulta.getDadosConsulta().getIdDadosConsulta();
                 this.medico = consulta.getMedico().getCpf();
                 this.paciente = consulta.getPaciente().getCpf();
-                this.exames = new ArrayList<>();
-                 
+                
                     for(int i = 0; i < consulta.getExames().size(); i++) {
                         ListarExames listarExames = new ListarExames(consulta.getExames().get(i));
-                          this.exames.add(listarExames);
+                        this.exames = new ArrayList<>();
+                        this.exames.add(listarExames);
                     }
-                
+                if(consulta.getDadosConsulta()!=null) {
+                    ListarDadosConsultas listarDadosConsulta = new ListarDadosConsultas(consulta.getDadosConsulta());
+                    this.exames = new ArrayList<>();
+                    this.dadosConsulta = listarDadosConsulta.getIdDadosConsulta();
+                }
                 
             }
 	    public ListarConsultas(Date diaConsulta,Date horaConsulta,Long codigoConsulta) {
@@ -150,20 +153,20 @@ public class ListarConsultas implements Serializable {
         this.paciente = paciente;
     }
 
-    public Long getDadosConsulta() {
-        return dadosConsulta;
-    }
-
-    public void setDadosConsulta(Long dadosConsulta) {
-        this.dadosConsulta = dadosConsulta;
-    }
-
     public Long getMedico() {
         return medico;
     }
 
     public void setMedico(Long medico) {
         this.medico = medico;
+    }
+
+    public Long getDadosConsulta() {
+        return dadosConsulta;
+    }
+
+    public void setDadosConsulta(Long dadosConsulta) {
+        this.dadosConsulta = dadosConsulta;
     }
 
     public List<ListarExames> getExames() {

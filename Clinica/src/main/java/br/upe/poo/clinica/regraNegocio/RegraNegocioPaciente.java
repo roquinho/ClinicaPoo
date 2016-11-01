@@ -56,23 +56,20 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     }
 
     @Override
-    public List<ListarPacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
+    public List<Pacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
         List<Pacientes> pacientes = null;
-        List<ListarPacientes> listarPacientes = new ArrayList<>();
+        //List<ListarPacientes> listarPacientes = new ArrayList<>();
         
         if(nome == null) {
           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
         }
         else {
             pacientes = irp.findByNome(nome);
-              for(int i = 0; i< pacientes.size(); i ++) {
-                  ListarPacientes listaPacientes = new ListarPacientes(pacientes.get(i));
-                    listarPacientes.add(listaPacientes);
-              }
+          
                      
              
         }        
-        return  listarPacientes;
+        return  pacientes;
     }
 
     @Override

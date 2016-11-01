@@ -23,7 +23,7 @@ public interface Fachada extends Serializable {
     
     public ListarPacientes buscarPacienteCpf(Long cpf)throws ExceptionRegraNegocioPacienteBuscarPaciente;
     
-    public List<ListarPacientes> buscarPacienteNome(String nome)throws ExceptionRegraNegocioPacienteBuscarPaciente;
+    public List<Pacientes> buscarPacienteNome(String nome)throws ExceptionRegraNegocioPacienteBuscarPaciente;
     
     public void atualizarPaciente(Pacientes paciente)throws ExceptionRegraNegocioAtualizarPacientes;
     
@@ -35,9 +35,9 @@ public interface Fachada extends Serializable {
     
     public ListarMedicos buscarMedicoCpf(Long cpf)throws ExceptionRegraNegocioBuscarMedicos;
     
-    public List<ListarMedicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
+    public List<Medicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
     
-    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade)throws ExceptionRegraNegocioBuscarMedicos;
+    public List<Medicos> buscarMedicoEspecialidade(String especialidade)throws ExceptionRegraNegocioBuscarMedicos;
     
     public void atualizarMedico(Medicos medico)throws ExceptionRegraNegocioAtualizarMedicos;
     
@@ -70,7 +70,7 @@ public interface Fachada extends Serializable {
     
     public ListarExames filtrarExameCodigo(Long codigoExame)throws ExceptionRegraNegocioFiltrarExame;
     
-    public List<ListarExames> filtrarTipoExame(String tipoExame)throws ExceptionRegraNegocioFiltrarExame;
+    public List<Exames> filtrarTipoExame(String tipoExame)throws ExceptionRegraNegocioFiltrarExame;
     
     public void atualizarExame(Exames exame)throws ExceptionRegraNegocioAtualizarExames;
     
