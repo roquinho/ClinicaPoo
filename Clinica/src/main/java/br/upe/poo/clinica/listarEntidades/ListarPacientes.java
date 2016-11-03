@@ -1,6 +1,5 @@
 package br.upe.poo.clinica.listarEntidades;
 
-import br.upe.poo.clinica.entidades.Consultas;
 import br.upe.poo.clinica.entidades.Pacientes;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,28 +29,20 @@ public class ListarPacientes implements Serializable {
              this.senha = paciente.getSenha();
              this.sexo = paciente.getSexo();
              this.telefone = paciente.getTelefone();
+             this.consultas = new ArrayList<>();
+             this.exames = new ArrayList<>();
              
 		  for(int i = 0; i<paciente.getConsultas().size(); i++) {                      
-                      ListarConsultas listaConsultas = new ListarConsultas(paciente.getConsultas().get(i));
-                      this.consultas = new ArrayList<>();
+                      ListarConsultas listaConsultas = new ListarConsultas(paciente.getConsultas().get(i));                      
                       this.consultas.add(listaConsultas);    }              
                    
                   for(int i = 0; i < paciente.getExames().size(); i++) {                     
                       ListarExames listaExames = new ListarExames(paciente.getExames().get(i));
-                      this.exames = new ArrayList<>();
                       this.exames.add(listaExames);
                   }
 	 }
-	 public ListarPacientes(String nome,String senha,String endereco,String telefone,String login,Date dataNascimento,String sexo) {             
-		 this.endereco = endereco;
-		 this.nome = nome;
-		 this.telefone = telefone;
-		 this.senha = senha;
-		 this.loginNome = login;
-		 this.sexo = sexo;
-		 this.dataNascimento = dataNascimento;		 
-	 }
-
+         
+	 
     @Override
     public int hashCode() {
         int hash = 7;

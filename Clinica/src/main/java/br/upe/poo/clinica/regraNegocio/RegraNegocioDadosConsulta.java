@@ -21,9 +21,7 @@ public class RegraNegocioDadosConsulta implements InterfaceRegraNegocioDadosCons
     @Autowired
     private InterfaceConsultasRepositorio irc;
     
-    public RegraNegocioDadosConsulta() {        
-    }
-
+    
     @Override
     public void gerarDadosConsulta(DadosConsultas dadosConsulta,Long codigoConsulta) throws ExceptionRegraNegocioDadosConsultasGerar {
         Consultas consulta = irc.findByCodigoConsulta(codigoConsulta);
@@ -57,14 +55,18 @@ public class RegraNegocioDadosConsulta implements InterfaceRegraNegocioDadosCons
 
     @Override
     public ListarDadosConsultas filtrarDadosConsulta(Long idDadosConsulta) throws ExceptionRegraNegocioDadosConsultasFiltrar {
-        DadosConsultas dadosConsultas = null;
+       ListarDadosConsultas listarDadosConsultas = null;
+       
          if(idDadosConsulta == null) {
              throw new ExceptionRegraNegocioDadosConsultasFiltrar();
          }
          else {
-             dadosConsultas = ird.findByIdDadosConsulta(idDadosConsulta);
+              DadosConsultas dadosConsultas = ird.findByIdDadosConsulta(idDadosConsulta);
+                if(dadosConsultas!=null) {
+                    listarDadosConsultas = new ListarDadosConsultas(dadosConsultas);
+                }
          }
-         return new ListarDadosConsultas(dadosConsultas);
+         return listarDadosConsultas;
     }
 
     @Override

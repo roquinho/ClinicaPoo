@@ -17,10 +17,6 @@ public class ListarResultadosExames implements Serializable {
           this.exame = resultadosExames.getExame().getCodigoExame();
       }
 
-      
-      public ListarResultadosExames(String diagnostico) {
-          this.diagnostico = diagnostico;
-      }
 
     @Override
     public int hashCode() {

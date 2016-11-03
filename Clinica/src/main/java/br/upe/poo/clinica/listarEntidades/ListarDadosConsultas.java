@@ -21,12 +21,7 @@ public class ListarDadosConsultas implements Serializable {
         this.consulta = dadosConsultas.getConsulta().getCodigoConsulta();
     }
     
-    public ListarDadosConsultas(Date inicioConsulta,Date fimConsulta,String observacoes) {
-        this.observacoes = observacoes; 
-        this.inicioConsulta = inicioConsulta;
-        this.fimConsulta = fimConsulta;
-    }
-
+  
     @Override
     public int hashCode() {
         int hash = 7;

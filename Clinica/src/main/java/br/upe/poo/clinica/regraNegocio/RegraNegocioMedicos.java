@@ -19,9 +19,8 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
     @Autowired
     private InterfaceMedicosRepositorio irm;
      
-      public RegraNegocioMedicos() {
-          
-      }
+    
+      
     @Override
     public void cadastrarMedicos(Medicos medico) throws ExceptionRegraNegocioCadastrarMedicos {
         if(medico==null) {
@@ -49,43 +48,57 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
 
     @Override
     public ListarMedicos buscarMedicoCpf(Long cpf) throws ExceptionRegraNegocioBuscarMedicos {
-        Medicos medico = null;
+        ListarMedicos listarMedicos = null;
         if(cpf==null) {
-            throw new ExceptionRegraNegocioBuscarMedicos();
+           throw new ExceptionRegraNegocioBuscarMedicos();
         }
         else {
-            medico = irm.findByCpf(cpf);
+           Medicos medico = irm.findByCpf(cpf);
+             if(medico!=null) {
+                listarMedicos = new ListarMedicos(medico);
+             }
         }
-       return new ListarMedicos(medico);
+      return listarMedicos;
     }
 
     @Override
-    public List<Medicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
-        List<Medicos> medicos;
-        //List<Medicos> listarMedicos = new ArrayList<>();
+    public List<ListarMedicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {        
+        List<ListarMedicos> listarMedicos = new ArrayList<>();
+        
          if(nome==null) {
              throw new ExceptionRegraNegocioBuscarMedicos();
          }
          else {
-          medicos = irm.findByNome(nome);
+           List<Medicos> medico = irm.findByNome(nome);
+             if(medico!=null) {
+                 for(int i = 0; i<medico.size(); i++) {
+                   ListarMedicos medicos = new ListarMedicos(medico.get(i));
+                    listarMedicos.add(medicos);
+                 }
+             }
           
     }
-         return medicos;
+         return listarMedicos;
     }
     
     @Override
-    public List<Medicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
-      List<Medicos> medicos;
-     // List<Medicos> listarMedicos = new ArrayList<>();
+    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
+      List<ListarMedicos> listarMedicos = new ArrayList<>();
+      
          if(especialidade==null) {
              throw new ExceptionRegraNegocioBuscarMedicos();
          }
          else {
-          medicos = irm.findByEspecialidade(especialidade);
-          
+         List<Medicos> medico = irm.findByEspecialidade(especialidade);
+          if(medico!=null) {
+                 for(int i = 0; i<medico.size(); i++) {
+                   ListarMedicos medicos = new ListarMedicos(medico.get(i));
+                     listarMedicos.add(medicos);
             
-    }
-         return medicos;
+                           }
+          }
+         }
+         return listarMedicos;
     }
 
     @Override
@@ -122,7 +135,7 @@ public class RegraNegocioMedicos implements InterfaceRegraNegocioMedicos {
             throw new ExceptionRegraNegocioDeletarMedicos();
         }
         else {
-            irm.delete(medico);
+            this.irm.delete(medico);
         }
     }
 

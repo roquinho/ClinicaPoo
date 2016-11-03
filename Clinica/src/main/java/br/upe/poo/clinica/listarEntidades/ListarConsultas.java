@@ -16,7 +16,7 @@ public class ListarConsultas implements Serializable {
 	private Date diaConsulta;
 	private Date horaConsulta;
 	private Long paciente;
-	private Long  dadosConsulta;
+	private ListarDadosConsultas dadosConsulta;
 	private Long medico;
         private List<ListarExames> exames;
 	
@@ -28,26 +28,19 @@ public class ListarConsultas implements Serializable {
                 this.situacaoConsulta = consulta.isSituacaoConsulta();
                 this.medico = consulta.getMedico().getCpf();
                 this.paciente = consulta.getPaciente().getCpf();
-                
+                this.exames = new ArrayList<>();
+                this.exames = new ArrayList<>();
                     for(int i = 0; i < consulta.getExames().size(); i++) {
-                        ListarExames listarExames = new ListarExames(consulta.getExames().get(i));
-                        this.exames = new ArrayList<>();
+                        ListarExames listarExames = new ListarExames(consulta.getExames().get(i));                        
                         this.exames.add(listarExames);
                     }
                 if(consulta.getDadosConsulta()!=null) {
-                    ListarDadosConsultas listarDadosConsulta = new ListarDadosConsultas(consulta.getDadosConsulta());
-                    this.exames = new ArrayList<>();
-                    this.dadosConsulta = listarDadosConsulta.getIdDadosConsulta();
+                    ListarDadosConsultas listarDadosConsulta = new ListarDadosConsultas(consulta.getDadosConsulta());                    
+                    this.dadosConsulta = listarDadosConsulta;
                 }
                 
             }
-	    public ListarConsultas(Date diaConsulta,Date horaConsulta,Long codigoConsulta) {
-                this.diaConsulta = diaConsulta;
-	    	this.horaConsulta = horaConsulta;
-                this.codigoConsulta = codigoConsulta;
-                        
-	    }
-
+	    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -161,11 +154,11 @@ public class ListarConsultas implements Serializable {
         this.medico = medico;
     }
 
-    public Long getDadosConsulta() {
+    public ListarDadosConsultas getDadosConsulta() {
         return dadosConsulta;
     }
 
-    public void setDadosConsulta(Long dadosConsulta) {
+    public void setDadosConsulta(ListarDadosConsultas dadosConsulta) {
         this.dadosConsulta = dadosConsulta;
     }
 

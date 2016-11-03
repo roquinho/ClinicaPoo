@@ -16,9 +16,9 @@ public interface InterfaceRegraNegocioMedicos extends Serializable {
     
     public ListarMedicos buscarMedicoCpf(Long cpf)throws ExceptionRegraNegocioBuscarMedicos;
     
-    public List<Medicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
+    public List<ListarMedicos> buscarMedicoNome(String nome)throws ExceptionRegraNegocioBuscarMedicos;
     
-    public List<Medicos> buscarMedicoEspecialidade(String especialidade)throws ExceptionRegraNegocioBuscarMedicos;
+    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade)throws ExceptionRegraNegocioBuscarMedicos;
     
     public void atualizarMedico(Medicos medico)throws ExceptionRegraNegocioAtualizarMedicos;
     

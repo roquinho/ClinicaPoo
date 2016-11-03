@@ -26,13 +26,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@Controller
 @RestController
 @RequestMapping("/Clinica")
 public class ClinicaController {
@@ -40,12 +40,13 @@ public class ClinicaController {
     @Autowired
     private Fachada fachada;
     
+   
     @RequestMapping("/paciente/add")
     public ResponseEntity<?> cadastrarPaciente(@RequestBody Pacientes paciente) {
         try {
            this.fachada.cadastrarPaciente(paciente);
         }catch(Exception e) {
-            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Exception>(e,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -61,8 +62,8 @@ public class ClinicaController {
        return paciente;
     }
     @RequestMapping(value = "/paciente/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Pacientes> buscarPacienteNome(@RequestParam String nome) {
-        List<Pacientes> listaPaciente = null;
+    public List<ListarPacientes> buscarPacienteNome(@RequestParam String nome) {
+        List<ListarPacientes> listaPaciente = null;
         try {
      listaPaciente =  this.fachada.buscarPacienteNome(nome);
         } catch (Exception e) {
@@ -76,7 +77,7 @@ public class ClinicaController {
         try {
             this.fachada.atualizarPaciente(paciente);
         } catch (Exception e) {
-             return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+             return new ResponseEntity<Exception>(e,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -112,8 +113,8 @@ public class ClinicaController {
         return medico;
     }
     @RequestMapping(value = "/medico/buscaNome",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> buscarMedicoNome(@RequestParam String nome) {
-        List<Medicos> medicos = null;
+    public List<ListarMedicos> buscarMedicoNome(@RequestParam String nome) {
+        List<ListarMedicos> medicos = null;
         try {
             medicos = this.fachada.buscarMedicoNome(nome);
         } catch (Exception ex) {
@@ -123,8 +124,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/medico/buscaEspecialidade",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Medicos> buscarMedicoEspecialidade(@RequestParam String especialidade) {
-       List<Medicos> medicos = null;
+    public List<ListarMedicos> buscarMedicoEspecialidade(@RequestParam String especialidade) {
+       List<ListarMedicos> medicos = null;
         try {
            medicos =  this.fachada.buscarMedicoEspecialidade(especialidade);
         } catch (Exception ex) {
@@ -138,7 +139,7 @@ public class ClinicaController {
         try {
             this.fachada.atualizarMedico(medico);
         } catch (Exception e) {
-             return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+             return new ResponseEntity<Exception>(e,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -201,11 +202,9 @@ public class ClinicaController {
     
     @RequestMapping("/consulta/agendar")
     public ResponseEntity<?> agendarConsulta(@RequestBody Consultas consulta, @RequestParam Long pacienteCpf, @RequestParam Long medicoCpf) {
-        try {System.out.println(consulta.getCodigoConsulta());
+        try {
             this.fachada.agendarConsulta(consulta,pacienteCpf,medicoCpf);
-            System.out.println(medicoCpf);
-        } catch (Exception ex) {
-            System.out.println("erro"+medicoCpf); 
+        } catch (Exception ex) { 
             return new ResponseEntity<Exception>(ex,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
@@ -248,7 +247,7 @@ public class ClinicaController {
         try {
             this.fachada.agendarExame(exame, pacienteCpf, codigoConsulta);
         } catch (Exception ex) {
-            return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Exception>(ex,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -265,8 +264,8 @@ public class ClinicaController {
     }
     
     @RequestMapping(value = "/exame/filtrarTipoExame",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Exames> filtrarExameTipoExame(@RequestParam String tipoExame) {
-        List<Exames> exames = null;
+    public List<ListarExames> filtrarExameTipoExame(@RequestParam String tipoExame) {
+        List<ListarExames> exames = null;
         try {
             exames = this.fachada.filtrarTipoExame(tipoExame);
         } catch (ExceptionRegraNegocioFiltrarExame ex) {
@@ -301,7 +300,7 @@ public class ClinicaController {
         try {
             this.fachada.gerarDadosConsulta(dadosConsulta, codigoConsulta);System.out.println("br.upe.poo.clinica.ui.ClinicaController.gerarDadosConsulta()");
         } catch (Exception ex) {
-          return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+          return new ResponseEntity<Exception>(ex,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK);
         }
@@ -343,7 +342,7 @@ public class ClinicaController {
         try {
             this.fachada.gerarResultadoExames(resultadosExames, codigoExame);
         } catch (Exception ex) {
-           return new ResponseEntity<Exception>(HttpStatus.BAD_REQUEST);
+           return new ResponseEntity<Exception>(ex,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(HttpStatus.OK); 
         
@@ -381,12 +380,5 @@ public class ClinicaController {
         
     }
     
-    
-    public Fachada getFachada() {
-        return fachada;
-    }
-
-    public void setFachada(Fachada fachada) {
-        this.fachada = fachada;
-    }
+   
 }

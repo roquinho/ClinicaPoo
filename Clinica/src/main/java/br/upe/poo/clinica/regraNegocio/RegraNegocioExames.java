@@ -27,9 +27,7 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
     @Autowired
     private InterfaceRepositorioPacientes irp;
     
-    public RegraNegocioExames () {          
-      }
-      
+    
     @Override
     public void agendarExame(Exames exame,Long pacienteCpf,Long codigoConsulta) throws ExceptionRegraNegocioAgendarExame {
         
@@ -69,30 +67,37 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
 
     @Override
     public ListarExames filtrarExameCodigo(Long codigoExame) throws ExceptionRegraNegocioFiltrarExame {
-        Exames exame = null;
+        ListarExames listarExames = null;
         
         if(codigoExame == null) {
             throw new ExceptionRegraNegocioFiltrarExame();
         }
         else {
-            exame = ire.findByCodigoExame(codigoExame);
+            Exames exame = ire.findByCodigoExame(codigoExame);
+             if(exame!=null) {
+                listarExames = new ListarExames(exame);
+             }
         }
-        return new ListarExames(exame);
+        return listarExames;
     }
     
     @Override
-    public List<Exames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
-        List<Exames> exames = null;
-        //List<ListarExames> listarExames = new ArrayList<>();
+    public List<ListarExames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
+        List<ListarExames> listarExames = new ArrayList<>();
         
         if(tipoExame == null) {
             throw new ExceptionRegraNegocioFiltrarExame();
         }
         else {
-            exames = ire.findByTipoExame(tipoExame);
-         
+            List<Exames> exame = ire.findByTipoExame(tipoExame);
+             if(exame!=null) {
+                for(int i= 0; i<exame.size(); i++) {
+                  ListarExames exames = new ListarExames(exame.get(i));
+                   listarExames.add(exames);
+                } 
+             }
         }
-        return exames;
+        return listarExames;
     }
 
     @Override
@@ -134,8 +139,11 @@ public class RegraNegocioExames implements InterfaceRegraNegocioExames {
         if(codigoExame == null) {
             throw new ExceptionRegraNegocioDeletarExames();
         }
+        if(this.ire.findByCodigoExame(codigoExame)==null) {
+            throw new ExceptionRegraNegocioDeletarExames();
+        }
         else {
-            ire.delete(ire.findByCodigoExame(codigoExame));
+            this.ire.delete(codigoExame);
         }
     }
 

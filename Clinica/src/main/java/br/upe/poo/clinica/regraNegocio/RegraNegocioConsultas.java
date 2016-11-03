@@ -25,14 +25,12 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     @Autowired
     private InterfaceMedicosRepositorio irm;
     
-    public RegraNegocioConsultas() {        
-    }
-
+   
     @Override
     public void agendarConsulta(Consultas consulta,Long PacienteCpf,Long MedicoCpf) throws ExceptionRegraNegocioAgendarConsultas {
         
-       Pacientes paciente = irp.findByCpf(PacienteCpf);
-       Medicos medico = irm.findByCpf(MedicoCpf);
+       Pacientes paciente = this.irp.findByCpf(PacienteCpf);
+       Medicos medico = this.irm.findByCpf(MedicoCpf);
             
         if(consulta == null) {
             throw new ExceptionRegraNegocioAgendarConsultas();
@@ -52,29 +50,32 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
         if(consulta.getCodigoConsulta() == null) {
             throw new ExceptionRegraNegocioAgendarConsultas();
         }
-       if(irc.findByCodigoConsulta(consulta.getCodigoConsulta())!=null) {
+       if(this.irc.findByCodigoConsulta(consulta.getCodigoConsulta())!=null) {
             throw new ExceptionRegraNegocioAgendarConsultas();
         }
-        else {
-            
+        else {            
                consulta.setPaciente(paciente);
                consulta.setMedico(medico);
-               irc.save(consulta);     
+               this.irc.save(consulta);     
         }
                 
     }
 
     @Override
     public ListarConsultas filtrarConsultaCodigoConsulta(Long codigoConsulta) throws ExceptionRegraNegocioFiltrarConsultas {
-        Consultas consultas = null;
+        
+        ListarConsultas listarConsultas = null;
         
         if(codigoConsulta == null) {
             throw new ExceptionRegraNegocioFiltrarConsultas();
         }
         else {
-            consultas = irc.findByCodigoConsulta(codigoConsulta);
-        }       
-        return new ListarConsultas(consultas);
+           Consultas consultas = irc.findByCodigoConsulta(codigoConsulta);
+             if(consultas!=null) {
+               listarConsultas = new ListarConsultas(consultas);
+        }   
+        }
+        return listarConsultas;
     }
 
     @Override
@@ -111,7 +112,15 @@ public class RegraNegocioConsultas implements InterfaceRegraNegocioConsultas {
     @Override
     public void deletarConsultas(Long codigoConsulta) throws ExceptionRegraNegocioDeletarConsultas {  
                 
-            irc.delete(irc.findByCodigoConsulta(codigoConsulta));
+           if(codigoConsulta==null) {
+               throw new ExceptionRegraNegocioDeletarConsultas();
+           }
+           if(this.irc.findByCodigoConsulta(codigoConsulta)==null) {
+               throw new ExceptionRegraNegocioDeletarConsultas();
+           }
+           else {
+              this.irc.delete(codigoConsulta);
+           }
         
     }
     

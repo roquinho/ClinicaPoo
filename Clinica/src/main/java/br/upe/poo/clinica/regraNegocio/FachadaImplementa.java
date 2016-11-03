@@ -35,9 +35,7 @@ public class FachadaImplementa implements Fachada {
     @Autowired
     private InterfaceRegraNegocioResultadoExames resultadoExames;
       
-        public FachadaImplementa() {
-            
-        }
+       
     @Override
     public void cadastrarPaciente(Pacientes paciente) throws ExceptionRegraNegocioPacientesCadastrar {
        this.pacientes.cadastrarPaciente(paciente);
@@ -49,7 +47,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Pacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
+    public List<ListarPacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
        return this.pacientes.buscarPacienteNome(nome);
     }
 
@@ -74,14 +72,14 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Medicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
+    public List<ListarMedicos> buscarMedicoNome(String nome) throws ExceptionRegraNegocioBuscarMedicos {
         return this.medicos.buscarMedicoNome(nome);
     }
     
-    @Override
-    public List<Medicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
+   @Override
+    public List<ListarMedicos> buscarMedicoEspecialidade(String especialidade) throws ExceptionRegraNegocioBuscarMedicos {
         return this.medicos.buscarMedicoEspecialidade(especialidade);
-    }
+    } 
 
     @Override
     public void atualizarMedico(Medicos medico) throws ExceptionRegraNegocioAtualizarMedicos {
@@ -154,7 +152,7 @@ public class FachadaImplementa implements Fachada {
     }
 
     @Override
-    public List<Exames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
+    public List<ListarExames> filtrarTipoExame(String tipoExame) throws ExceptionRegraNegocioFiltrarExame {
         return this.exames.filtrarTipoExame(tipoExame);
     }
 
@@ -197,5 +195,7 @@ public class FachadaImplementa implements Fachada {
     public void deletarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesDeletar {
         this.resultadoExames.deletarResultadoExame(idResultadoExames);
     }
+
+ 
     
 }

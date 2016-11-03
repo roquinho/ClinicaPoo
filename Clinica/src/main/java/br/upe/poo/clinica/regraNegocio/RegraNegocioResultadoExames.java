@@ -22,8 +22,7 @@ public class RegraNegocioResultadoExames implements InterfaceRegraNegocioResulta
     @Autowired
     private InterfaceExamesRepositorio ire;
     
-    public RegraNegocioResultadoExames() {        
-    }
+   
 
     @Override
     public void gerarResultadoExames(ResultadosExames resultadoExames,Long codigoExame) throws ExceptionRegraNegocioResultadosExamesGerar {
@@ -52,14 +51,17 @@ public class RegraNegocioResultadoExames implements InterfaceRegraNegocioResulta
 
     @Override
     public ListarResultadosExames filtrarResultadoExame(Long idResultadoExames) throws ExceptionRegraNegocioResultadosExamesFiltrar {
-        ResultadosExames resultadosExames = null;
+       ListarResultadosExames listarResultadosExames = null; 
          if(idResultadoExames == null) {
              throw new ExceptionRegraNegocioResultadosExamesFiltrar();
          }
          else {
-             resultadosExames = irr.findByIdResultadoExames(idResultadoExames);
+           ResultadosExames resultadosExames = irr.findByIdResultadoExames(idResultadoExames);
+             if(resultadosExames!=null) {
+                 listarResultadosExames = new ListarResultadosExames(resultadosExames);
+             }
          }
-         return new ListarResultadosExames(resultadosExames);
+         return listarResultadosExames;
     }
 
     @Override

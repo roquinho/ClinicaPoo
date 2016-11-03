@@ -29,22 +29,12 @@ public class ListarMedicos implements Serializable {
                  this.senha = medicos.getSenha();
                  this.telefone = medicos.getTelefone();
                  this.consultas = new ArrayList<>();
-                 
                     for(int i = 0; i< medicos.getConsultas().size();i++) {
-                        ListarConsultas listarConsultas = new ListarConsultas(medicos.getConsultas().get(i));
+                        ListarConsultas listarConsultas = new ListarConsultas(medicos.getConsultas().get(i));                         
                           this.consultas.add(listarConsultas);
                     }
                          
                          
-	 }
-	 public ListarMedicos(String nome,String senha,String endereco,Long telefone,String login,Long crm,String especialidade) {
-		 this.endereco = endereco;
-		 this.nome = nome;
-		 this.telefone = telefone;
-		 this.senha = senha;
-		 this.loginNome = login;
-		 this.crm = crm;
-                 this.especialidade = especialidade;
 	 }
 
     @Override

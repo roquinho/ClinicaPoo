@@ -14,8 +14,6 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
     @Autowired
     private InterfaceRepositorioPacientes irp;
     
-      public RegraNegocioPaciente() {
-      }
     
     @Override
     public void cadastrarPaciente(Pacientes paciente)throws ExceptionRegraNegocioPacientesCadastrar {
@@ -44,32 +42,37 @@ public class RegraNegocioPaciente implements InterfaceRegraNegocioPacientes{
 
     @Override
     public ListarPacientes buscarPacienteCpf(Long cpf) throws ExceptionRegraNegocioPacienteBuscarPaciente {
-        Pacientes paciente = null;
+        ListarPacientes listaPacientes = null;
         
        if(cpf == null){
            throw new ExceptionRegraNegocioPacienteBuscarPaciente();
        }
        else {
-           paciente = irp.findByCpf(cpf);
+          Pacientes paciente = irp.findByCpf(cpf);
+            if(paciente!=null) {
+             listaPacientes = new ListarPacientes(paciente);  
+            }
        }
-        return new ListarPacientes(paciente);
+        return listaPacientes; 
     }
 
     @Override
-    public List<Pacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
-        List<Pacientes> pacientes = null;
-        //List<ListarPacientes> listarPacientes = new ArrayList<>();
-        
+    public List<ListarPacientes> buscarPacienteNome(String nome) throws ExceptionRegraNegocioPacienteBuscarPaciente {
+      List<ListarPacientes> listarPacientes = new ArrayList<>();
+       
         if(nome == null) {
           throw new ExceptionRegraNegocioPacienteBuscarPaciente();
         }
         else {
-            pacientes = irp.findByNome(nome);
-          
-                     
-             
-        }        
-        return  pacientes;
+           List<Pacientes> pacientes = irp.findByNome(nome);
+            if(pacientes!=null) {
+                for(int i = 0; i<pacientes.size(); i++) {
+                 ListarPacientes paciente = new ListarPacientes(pacientes.get(i));
+                   listarPacientes.add(paciente);
+                }              
+                       }
+            }
+        return  listarPacientes;
     }
 
     @Override

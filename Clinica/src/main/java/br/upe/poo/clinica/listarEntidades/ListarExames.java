@@ -14,7 +14,7 @@ public class ListarExames implements Serializable {
 	private Date horaExame;
 	private String tipoExame;
 	private Long paciente;
-	private Long resultadoExame;
+	private ListarResultadosExames resultadoExame;
 	private Long consulta; 
         
 	 public ListarExames(Exames exame) {
@@ -28,17 +28,10 @@ public class ListarExames implements Serializable {
                  
                     if(exame.getResultadoExame()!=null) {
                         ListarResultadosExames listarResultadosExame = new ListarResultadosExames(exame.getResultadoExame());
-                        this.resultadoExame = listarResultadosExame.getIdResultadoExames();
+                        this.resultadoExame = listarResultadosExame;
                     }
 	 }
          
-	 public ListarExames(String tipoExame,Date dataExame,Date horaExame,Long codigoExame) {
-                 this.tipoExame = tipoExame;
-                 this.dataExame = dataExame;
-                 this.horaExame = horaExame;
-                 this.codigoExame = codigoExame;
-	 }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -145,11 +138,11 @@ public class ListarExames implements Serializable {
         this.paciente = paciente;
     }
 
-    public Long getResultadoExame() {
+    public ListarResultadosExames getResultadoExame() {
         return resultadoExame;
     }
 
-    public void setResultadoExame(Long resultadoExame) {
+    public void setResultadoExame(ListarResultadosExames resultadoExame) {
         this.resultadoExame = resultadoExame;
     }
 
